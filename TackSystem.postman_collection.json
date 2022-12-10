@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "df20e7a0-a1c3-4ecf-a022-765eba14aab1",
+		"name": "TackSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"حسین\",\r\n    \"lastName\": \"امینی\",\r\n    \"phoneNumber\": \"09336463186\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/register",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"09336463186\",\r\n    \"password\": \"123456\",\r\n    \"entranceCode\": \"71951\",\r\n    \"loginType\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/login",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phoneNumber\": \"09336463186\",\r\n    \"email\": \"\",\r\n    \"codeType\": \"resetPassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/send/code",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"send",
+						"code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerifyCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phoneNumber\": \"09336463186\",\r\n    \"email\": \"\",\r\n    \"verificationCode\": \"62769\",\r\n    \"codeType\": \"phoneVerification\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/verify/code",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"verify",
+						"code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"09336463186\",\r\n    \"newPassword\": \"123456\",\r\n    \"oneTimePassword\": \"93210\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/reset-password",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Track_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3NzYwNjQ0MiwiaWF0IjoxNjY5ODMwNDQyLCJqdGkiOiIyZmY1NGRhNGE5YmI0Yzk2YmU0M2JlYzE3MGFhYmVkMiIsInVzZXJfaWQiOjF9.2MAg3nG-uirs75JTFflM47I3UnDZRwERu2NXgrIBJuA\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/refresh/token",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"refresh",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Track_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Track_server}}:{{Track_port}}/api/user/profile",
+					"host": [
+						"{{Track_server}}"
+					],
+					"port": "{{Track_port}}",
+					"path": [
+						"api",
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
