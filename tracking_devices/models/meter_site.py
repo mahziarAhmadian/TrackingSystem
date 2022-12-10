@@ -4,9 +4,9 @@ from django.utils import timezone
 from . import User
 
 
-class TruckingRecords(models.Model):
+class MeterSite(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField()
+    name = models.CharField(max_length=255)
     lat = models.FloatField()
     long = models.FloatField()
     information = models.JSONField()

@@ -13,8 +13,8 @@ class Truck(models.Model):
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
     meter = models.OneToOneField(Meter, on_delete=models.CASCADE)
-    driver = models.OneToOneField(User, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    driver = models.OneToOneField(User, on_delete=models.CASCADE, related_name='driver_name')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner_name')
 
     def __str__(self) -> str:
         return "{}".format(self.name)
