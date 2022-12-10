@@ -1,11 +1,12 @@
 import uuid
-
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from authorization.models import Permission
 from general.utils.handle_exception import CustomException
+from .user_type import UserType
+from .user_profile import UserProfile
 
 
 class UserManager(BaseUserManager):
@@ -50,12 +51,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email = models.EmailField(verbose_name='Email Address', blank=True)
-    first_name = models.CharField(max_length=255, blank=True)
-    last_name = models.CharField(max_length=255, blank=True)
-    country_code = models.CharField(max_length=4, default="+98")
     phone_number = models.CharField(max_length=255, unique=True)
-    email_is_valid = models.BooleanField(default=False)
     phone_number_is_valid = models.BooleanField(default=False)
     blocked = models.BooleanField(default=False)
     registered_at = models.DateTimeField(default=timezone.now)
@@ -64,14 +60,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     notes = models.TextField(default="")
-    national_id = models.CharField(max_length=12, default='', blank=True)
-
     permissions = models.ManyToManyField(Permission)
-
+    type = models.ForeignKey(UserType, on_delete=models.CASCADE)
+    profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    create_time = models.DateTimeField(default=timezone.now)
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
 
     def __str__(self):
-        return "{} {} - {}".format(self.first_name, self.last_name, self.phone_number)
+        return "{}".format(self.phone_number)

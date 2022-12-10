@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils import timezone
 from user.models import User
@@ -10,7 +12,7 @@ class VerificationCode(models.Model):
         ('EN', 'entrance'),
         ('RST', 'resetPassword')
     )
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(max_length=80, choices=TYPE_CHOICES)
     code = models.CharField(max_length=80)
     sent = models.BooleanField(default=False)
