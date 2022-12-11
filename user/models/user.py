@@ -26,6 +26,7 @@ class UserManager(BaseUserManager):
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
         try:
+
             user.save()
             return user
         except:
@@ -61,8 +62,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     notes = models.TextField(default="")
     permissions = models.ManyToManyField(Permission)
-    type = models.ForeignKey(UserType, on_delete=models.CASCADE)
-    profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    type = models.ForeignKey(UserType, on_delete=models.CASCADE, null=True, blank=True)
+    profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
     create_time = models.DateTimeField(default=timezone.now)
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []

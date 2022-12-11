@@ -350,5 +350,22 @@ responses = {
         "error_code": 1014,
         "english_details": "user_id is required",
         "farsi_details": "وارد کردن یوزر ای است."
+    },
+    "PERMISSION_DENIED": {
+        "status": "failed",
+        "status_code": 403,
+        "summary": "PERMISSION_ERROR",
+        "error_code": 1015,
+        "english_details": "You don't have permission for this.",
+        "farsi_details": "شما دسترسی لازم برای این بخش را ندارید."
+    },
+    "FIELD_REQUIRED": {
+        "status": "failed",
+        "status_code": 444,
+        "summary": "FIELD ERROR",
+        "error_code": 1016,
+        "english_details": "please enter required field .",
+        "farsi_details": "لطفا فیلد مورد نظر را وارد کنید"
     }
+
 }

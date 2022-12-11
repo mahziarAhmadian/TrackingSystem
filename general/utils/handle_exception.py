@@ -78,17 +78,22 @@ def format_error(error):
     }
 
 
-def handle_error_from_ram(keyword):
+def handle_error_from_ram(keyword, required_field):
+    # if
     error = responses.get(keyword)
     if error is None:
         keyword = 'UNKNOWN'
         error = responses.get(keyword)
+    if required_field is not None:
+        error['summary'] = required_field + '_' + 'FIELD_REQUIRED'
+        error['english_details'] = f"please enter {required_field} field ."
+        error['farsi_details'] = f"لطفا فیلد {required_field} وارد کنید"
     return format_error(error)
 
 
-def generate_error(keyword, **kwargs):
+def generate_error(keyword, required_field=None, **kwargs):
     if settings.HANDLE_ERROR_FROM == "RAM":
-        return handle_error_from_ram(keyword=keyword)
+        return handle_error_from_ram(keyword=keyword, required_field=required_field)
     else:
         return handle_error_from_db(keyword=keyword)
 
@@ -108,11 +113,17 @@ def custom_exception_handler(exc, context):
         # return Response(data=unknown_error, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
     try:
+        print(response.data)
+        # required_filed = response.data.get('required_filed')
         error_summary = response.data.get('summary')
         extra_fields = response.data.get('extra_fields')
         print(error_summary)
         print(extra_fields)
-        main_error = generate_error(keyword=error_summary)
+        if 'required_field' in extra_fields:
+            required_field = extra_fields.get('required_field')
+        else:
+            required_field = None
+        main_error = generate_error(keyword=error_summary, required_field=required_field)
         # ----------------------------------------------------------------------
         error_list = extra_fields.get('errorList', None)
         if error_list is not None:

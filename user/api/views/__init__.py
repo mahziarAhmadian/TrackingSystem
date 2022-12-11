@@ -5,3 +5,4 @@ from .send_code import SendCodeAPI
 from .verify_code import VerifyCodeAPI
 from .profile import ProfileAPI
 from .reset_password import ResetPasswordAPI
+from .user_view import UserAPI

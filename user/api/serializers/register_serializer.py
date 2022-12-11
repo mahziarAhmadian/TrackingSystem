@@ -13,15 +13,15 @@ class PasswordField(serializers.CharField):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    firstName = serializers.CharField(source='first_name', required=False)
-    lastName = serializers.CharField(source='last_name', required=False)
+    # firstName = serializers.CharField(source='first_name', required=False)
+    # lastName = serializers.CharField(source='last_name', required=False)
     # required True checked on validation code by my self
     phoneNumber = serializers.CharField(source='phone_number', required=False)
     password = PasswordField()
 
     class Meta:
         model = User
-        fields = ('firstName', 'lastName', 'phoneNumber', 'password')
+        fields = ('phoneNumber', 'password')
 
     def _validate_first_name(self, first_name):
         if first_name is None:
@@ -52,14 +52,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         attrs: ordered dict. contains all parameter that client sent to here as a request.
         '''
         # extract expected fields
-        first_name = attrs.get('first_name', None)
-        last_name = attrs.get('last_name', None)
+        # first_name = attrs.get('first_name', None)
+        # last_name = attrs.get('last_name', None)
         phone_number = attrs.get('phone_number', None)
         password = attrs.get('password', None)
         # ---------------------------------------------------------------------------------
         # validate fields
-        first_name = self._validate_first_name(first_name=first_name)
-        last_name = self._validate_last_name(last_name=last_name)
+        # first_name = self._validate_first_name(first_name=first_name)
+        # last_name = self._validate_last_name(last_name=last_name)
         phone_number = self._validate_phone_number(phone_number=phone_number)
         password = self._validate_password(password=password)
         # -----------------------------------------------------------------------------------
@@ -76,8 +76,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         # -----------------------------------------------------------------------------------
         # prepare validated data
         validated_data = {
-            'first_name': first_name.get('value'),
-            'last_name': last_name.get('value'),
+            # 'first_name': first_name.get('value'),
+            # 'last_name': last_name.get('value'),
             'phone_number': phone_number.get('value'),
             'password': password.get('value')
         }
@@ -90,4 +90,5 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(phone_number=phone_number,
                                         password=password,
                                         **validated_data)
+
         return user
