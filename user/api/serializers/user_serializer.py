@@ -6,10 +6,17 @@ from authorization.models import Permission
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    Email = serializers.EmailField(source='email', allow_blank=True)
+    FirstName = serializers.CharField(source='first_name', allow_blank=True)
+    LastName = serializers.CharField(source='last_name', allow_blank=True)
+    ZipCode = serializers.CharField(source='zip_code', allow_blank=True)
+    NationalId = serializers.CharField(source='national_id', allow_blank=True)
+    Information = serializers.CharField(source='information', allow_blank=True)
+
     class Meta:
         model = UserProfile
         fields = (
-            'id', 'email', 'email_is_verified', 'first_name', 'last_name', 'zip_code', 'national_id', 'information',
+            'id', 'Email', 'email_is_verified', 'FirstName', 'LastName', 'ZipCode', 'NationalId', 'Information',
             'create_time',)
 
 
@@ -33,10 +40,10 @@ class UserSerializer(serializers.ModelSerializer):
     isStaff = serializers.BooleanField(source='is_staff', required=False)
     isActive = serializers.BooleanField(source='is_active', required=False)
     isSuperuser = serializers.BooleanField(source='is_superuser', required=False)
-    Notes = serializers.CharField(source='notes', required=False)
+    Notes = serializers.CharField(source='notes', required=False, allow_blank=True)
     permissions = PermissionSerializer(many=True, read_only=True)
     type = TypeSerializer(many=True, read_only=True)
-    profile = TypeSerializer(many=True, read_only=True)
+    profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = User

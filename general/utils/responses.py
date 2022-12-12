@@ -366,6 +366,14 @@ responses = {
         "error_code": 1016,
         "english_details": "please enter required field .",
         "farsi_details": "لطفا فیلد مورد نظر را وارد کنید"
-    }
+    },
+    "USER_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "USER_DELETED",
+        "error_code": 0,
+        "english_details": "user  deleted successfully.",
+        "farsi_details": "کاربر با موفقیت حذف شد."
+    },
 
 }
