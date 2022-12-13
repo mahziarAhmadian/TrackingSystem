@@ -375,5 +375,29 @@ responses = {
         "english_details": "user  deleted successfully.",
         "farsi_details": "کاربر با موفقیت حذف شد."
     },
+    "TYPE_CREATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TYPE_CREATED",
+        "error_code": 0,
+        "english_details": "type  created successfully.",
+        "farsi_details": "تایپ با موفقیت اضافه شد . "
+    },
+    "TYPE_UPDATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TYPE_UPDATED",
+        "error_code": 0,
+        "english_details": "type  updated successfully.",
+        "farsi_details": "تایپ با موفقیت به روز رسانی شد . "
+    },
+    "TYPE_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "TYPE_NOT_EXISTS",
+        "error_code": 1010,
+        "english_details": "type with these id does not exists.",
+        "farsi_details": "تاییپ با اطلاعات وارد شده وجود ندارد."
+    },
 
 }
