@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-
     # CORS apps
     'corsheaders',
 
@@ -138,9 +137,8 @@ AUTH_USER_MODEL = 'user.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'general.utils.handle_access_authentication.CustomJWTAuthentication',
-
     ),
     'EXCEPTION_HANDLER': 'general.utils.custom_exception_handler'
 }

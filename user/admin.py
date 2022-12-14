@@ -19,3 +19,8 @@ class VerificationCodeAdmin(admin.ModelAdmin):
 @admin.register(models.UserProfile)
 class ProfileAdmin(admin.ModelAdmin):
     fields = ('email', 'email_is_verified', 'first_name', 'last_name', 'zip_code', 'national_id', 'information')
+
+
+@admin.register(models.UserImage)
+class UserImageAdmin(admin.ModelAdmin):
+    fields = ('user', 'sm_image', 'md_image', 'lg_image',)

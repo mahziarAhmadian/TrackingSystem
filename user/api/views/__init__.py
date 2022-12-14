@@ -7,3 +7,4 @@ from .profile import ProfileAPI
 from .reset_password import ResetPasswordAPI
 from .user_view import UserAPI
 from .user_type_view import UserTypeView
+from .add_file import UserImage

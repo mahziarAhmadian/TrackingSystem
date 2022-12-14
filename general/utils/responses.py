@@ -371,7 +371,7 @@ responses = {
         "status": "success",
         "status_code": 200,
         "summary": "USER_DELETED",
-        "error_code": 0,
+        "error_code": 1016,
         "english_details": "user  deleted successfully.",
         "farsi_details": "کاربر با موفقیت حذف شد."
     },
@@ -379,7 +379,7 @@ responses = {
         "status": "success",
         "status_code": 200,
         "summary": "TYPE_CREATED",
-        "error_code": 0,
+        "error_code": 1017,
         "english_details": "type  created successfully.",
         "farsi_details": "تایپ با موفقیت اضافه شد . "
     },
@@ -387,7 +387,7 @@ responses = {
         "status": "success",
         "status_code": 200,
         "summary": "TYPE_UPDATED",
-        "error_code": 0,
+        "error_code": 1018,
         "english_details": "type  updated successfully.",
         "farsi_details": "تایپ با موفقیت به روز رسانی شد . "
     },
@@ -395,9 +395,25 @@ responses = {
         "status": "failed",
         "status_code": 404,
         "summary": "TYPE_NOT_EXISTS",
-        "error_code": 1010,
-        "english_details": "type with these id does not exists.",
+        "error_code": 1019,
+        "english_details": "type with this id does not exists.",
         "farsi_details": "تاییپ با اطلاعات وارد شده وجود ندارد."
+    },
+    "TYPE_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TYPE_DELETED",
+        "error_code": 1020,
+        "english_details": "type  deleted successfully.",
+        "farsi_details": "تایپ با موفقیت حذف شد."
+    },
+    "FILE_ADDED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "FILE_ADDED",
+        "error_code": 1021,
+        "english_details": "file  added successfully.",
+        "farsi_details": "فایل با موفقیت اضافه شد."
     },
 
 }

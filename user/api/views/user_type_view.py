@@ -4,25 +4,28 @@ from user.api.serializers.user_type_serializer import TypeSerializer
 from general.utils.custom_exception import CustomException
 from general.utils import generate_response
 from user.models import UserType
-from ..utils import check_field, invalid_error
+from ..utils import check_field, invalid_error, paginator
 
 
 class UserTypeView(APIView):
     serializer_class = TypeSerializer
     check_field = check_field.CheckField()
     invalid_error = invalid_error.InvalidError()
+    pagination_class = paginator.CustomPaginator
 
-    def get_object(self, type_id):
-
+    def get_object(self, type_id=None):
+        if type_id is None:
+            types = UserType.objects.all()
+            return types
         try:
-            user = UserType.objects.get(id=type_id)
+            type = UserType.objects.get(id=type_id)
         except:
             errors = []
             extra_fields = {
                 'errorList': errors
             }
             raise CustomException(error_summary='TYPE_NOT_EXISTS', extra_fields=extra_fields)
-        return user
+        return type
 
     def post(self, request, *args, **kwargs):
         input_data = request.data
@@ -41,8 +44,12 @@ class UserTypeView(APIView):
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
 
     def get(self, request, *args, **kwargs):
-        types = UserType.objects.all()
-        serializer = self.serializer_class(types, many=True)
+        input_data = request.data
+        required_fields = ['page', 'count']
+        self.check_field.check_field(required_fields=required_fields, input_data=input_data)
+        paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+        paginated_data = paginator.pagination_query(query_object=self.get_object(), order_by_object='create_time')
+        serializer = self.serializer_class(paginated_data, many=True)
         type_info = serializer.data
         data = generate_response(keyword='OPERATION_DONE')
         data['typeInfo'] = type_info
@@ -63,3 +70,13 @@ class UserTypeView(APIView):
             return Response(data, status=data.get('statusCode'))
         else:
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
+
+    def delete(self, request, *args, **kwargs):
+        input_data = request.data
+        self.check_field.check_user_permission(user=request.user, user_permission_name='DeleteType')
+        self.check_field.check_field(input_data=input_data, required_field='Id')
+        type_object = self.get_object(type_id=input_data.get('Id'))
+        type_object.delete()
+        data = generate_response(keyword='TYPE_DELETED')
+        return Response(data, status=data.get('statusCode'))
+

@@ -1,13 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from user.api.serializers.user_serializer import UserSerializer, ProfileSerializer
+from user.api.serializers.user_serializer import UserSerializer, ProfileSerializer, UserImageSerializer
 from general.utils.custom_exception import CustomException
 from general.utils import generate_response
 from user.models import User
+from user.api.utils import check_field, invalid_error, paginator
 
 
 class UserAPI(APIView):
     serializer_class = UserSerializer
+    pagination_class = paginator.CustomPaginator
+    check_field = check_field.CheckField()
+    invalid_error = invalid_error.InvalidError()
 
     def get_object(self, user_id=None):
         if user_id is None:
@@ -23,128 +27,53 @@ class UserAPI(APIView):
                 raise CustomException(error_summary='USER_NOT_EXISTS', extra_fields=extra_fields)
         return user
 
-    def method_type_check(self, input_data):
-        if 'MethodType' not in input_data:
-            errors = []
-            extra_fields = {
-                'errorList': errors,
-                'required_field': 'MethodType'
-            }
-            raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-        method_type = input_data.get('MethodType')
-        if method_type == 'All':
-            user = self.get_object()
-        elif method_type == 'One':
-            if 'user_id' not in input_data:
-                errors = []
-                extra_fields = {
-                    'errorList': errors,
-                    'required_field': 'user_id'
-                }
-                raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-            user_id = input_data.get('user_id')
-            user = self.get_object(user_id=user_id)
-        return user
-
-    def check_owner_type(self, input_data):
-        if 'OwnerType' not in input_data:
-            errors = []
-            extra_fields = {
-                'errorList': errors,
-                'required_field': 'OwnerType'
-            }
-            raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-        else:
-            return input_data.get('OwnerType')
-
-    def check_user_permission(self, user, user_permission_name):
-        if not user.is_superuser:
-            errors = []
-            extra_fields = {
-                'errorList': errors
-            }
-            raise CustomException(error_summary='PERMISSION_DENIED', extra_fields=extra_fields)
-        try:
-            user_permission = user.permissions.get(title=user_permission_name)
-        except:
-            errors = []
-            extra_fields = {
-                'errorList': errors
-            }
-            raise CustomException(error_summary='PERMISSION_DENIED', extra_fields=extra_fields)
-
-    def field_check(self, input_data, required_fields=None, required_field=None):
-        if required_field is not None:
-            if required_field not in input_data:
-                errors = []
-                extra_fields = {
-                    'errorList': errors,
-                    'required_field': required_field
-                }
-                raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-        if required_fields is not None:
-            for field in required_fields:
-                if field not in input_data:
-                    errors = []
-                    extra_fields = {
-                        'errorList': errors,
-                        'required_field': field
-                    }
-                    raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-
     def put(self, request, *args, **kwargs):
         input_data = request.data
         user = request.user
-        owner_type = self.check_owner_type(input_data)
+        owner_type = self.check_field.check_owner_type(input_data)
         required_fields = ['Notes', 'profile_update']
-        self.field_check(input_data, required_fields)
+        self.check_field.check_field(input_data, required_fields)
         if input_data.get('profile_update'):
             profile_required_fields = ['Email', 'FirstName', 'LastName', 'ZipCode', 'NationalId', 'Information']
-            self.field_check(input_data, profile_required_fields)
+            self.check_field.check_field(input_data, profile_required_fields)
         if owner_type == 'Other':
+            user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
             required_fields.append('user_id')
-            input_data['MethodType'] = 'One'
-            user = self.method_type_check(input_data)
+            user = self.get_object(user_id=user_id)
         if input_data.get('profile_update'):
             profile_serializer = ProfileSerializer(user.profile, data=input_data)
             if profile_serializer.is_valid():
                 profile_serializer.save()
+            else:
+                self.invalid_error.invalid_serializer(profile_serializer.errors)
         serializer = self.serializer_class(user, data=input_data)
         if serializer.is_valid():
             serializer.save()
             data = generate_response(keyword='USER_UPDATED')
             return Response(data, status=data.get('statusCode'))
         else:
-            message = {
-                "Message": " Not Success ."
-            }
-            return Response(data=message)
+            self.invalid_error.invalid_serializer(serializer.errors)
 
     def patch(self, request, *args, **kwargs):
         input_data = request.data
         user = request.user
-        owner_type = self.check_owner_type(input_data)
+        owner_type = self.check_field.check_owner_type(input_data)
         if owner_type == 'Other':
-            self.check_user_permission(user=user, user_permission_name='EditUser')
+            self.check_field.check_user_permission(user=user, user_permission_name='EditUser')
             input_data['MethodType'] = 'One'
-            other_user = self.method_type_check(input_data)
-            user = other_user
-        self.field_check(input_data=input_data, required_field='profile_update')
-        if input_data.get('profile_update'):
+            other_user = self.check_field.check_field(input_data=input_data, required_field='UserID')
+            user = self.get_object(user_id=other_user)
+        self.check_field.check_field(input_data=input_data, required_field='ProfileUpdate')
+        if input_data.get('ProfileUpdate'):
             profile = user.profile
             if profile is not None:
                 profile_serializer = ProfileSerializer(profile, data=input_data, partial=True)
-                if profile_serializer.is_valid():
-                    profile_serializer.save()
+                if not profile_serializer.is_valid():
+                    self.invalid_error.invalid_serializer(serializer_error=profile_serializer.errors)
+                profile_serializer.save()
         serializer = self.serializer_class(user, data=request.data, partial=True)
         if not serializer.is_valid():
-            errors = serializer.errors.get('non_field_errors', None)
-            if errors is None:
-                errors = []
-            extra_fields = {
-                'errorList': errors
-            }
-            raise CustomException(error_summary='INVALID_DATA_RECEIVED', extra_fields=extra_fields)
+            self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
         serializer.save()
         data = generate_response(keyword='USER_UPDATED')
         return Response(data, status=data.get('statusCode'))
@@ -152,44 +81,44 @@ class UserAPI(APIView):
     def get(self, request, *args, **kwargs):
         input_data = request.data
         user = request.user
-        owner_type = self.check_owner_type(input_data)
+        owner_type = self.check_field.check_owner_type(input_data=input_data)
         if owner_type == 'Self':
             user_info = self.serializer_class(request.user).data
             data = generate_response(keyword='OPERATION_DONE')
             data['userInfo'] = user_info
             return Response(data, status=data.get('statusCode'))
         if owner_type == 'Other':
-            self.check_user_permission(user=user, user_permission_name='GetUserDetail')
-            user = self.method_type_check(input_data=input_data)
-            if input_data['MethodType'] == 'All':
-                user_info = self.serializer_class(user, many=True).data
+            self.check_field.check_user_permission(user=user, user_permission_name='GetUserDetail')
+            method_type = self.check_field.method_type_check(input_data=input_data)
+            if method_type == 'All':
+                required_fields = ['page', 'count']
+                self.check_field.check_field(input_data=input_data, required_fields=required_fields)
+                user = self.get_object(user_id=None)
+                pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+                user_pagination = pagination.pagination_query(query_object=user, order_by_object='create_time')
+                user_info = self.serializer_class(user_pagination, many=True).data
                 user_info.append({"all_users_count": user.count()})
             else:
+                user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
+                user = self.get_object(user_id=user_id)
                 user_info = self.serializer_class(user).data
             data = generate_response(keyword='OPERATION_DONE')
             data['userInfo'] = user_info
             return Response(data, status=data.get('statusCode'))
-        return Response(data={"message": "Test"})
 
     def delete(self, request, *args, **kwargs):
         input_data = request.data
         user = request.user
-        owner = self.check_owner_type(input_data)
+        owner = self.check_field.check_owner_type(input_data)
         if owner == 'Self':
             if user.profile is not None:
                 user.profile.delete()
             else:
                 user.delete()
         if owner == 'Other':
-            self.check_user_permission(user=user, user_permission_name='DeleteUser')
-            if 'user_id' not in input_data:
-                errors = []
-                extra_fields = {
-                    'errorList': errors,
-                    'required_field': 'user_id'
-                }
-                raise CustomException(error_summary='FIELD_REQUIRED', extra_fields=extra_fields)
-            user_object = self.get_object(user_id=input_data.get('user_id'))
+            self.check_field.check_user_permission(user=user, user_permission_name='DeleteUser')
+            user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
+            user_object = self.get_object(user_id=user_id)
             if user_object.profile is not None:
                 user_object.profile.delete()
             else:
