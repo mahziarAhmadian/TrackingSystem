@@ -1,9 +1,4 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from user.api.serializers.user_serializer import UserSerializer, ProfileSerializer
 from general.utils.custom_exception import CustomException
-from general.utils import generate_response
-from user.models import User
 
 
 class CheckField:

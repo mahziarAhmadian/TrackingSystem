@@ -3,8 +3,7 @@ from .refresh_token import RefreshTokenView
 from .register import RegisterAPI
 from .send_code import SendCodeAPI
 from .verify_code import VerifyCodeAPI
-from .profile import ProfileAPI
 from .reset_password import ResetPasswordAPI
 from .user_view import UserAPI
 from .user_type_view import UserTypeView
-from .add_file import UserImage
+from .image import UserImageView

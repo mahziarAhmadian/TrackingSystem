@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from user.api.serializers.user_serializer import UserSerializer, ProfileSerializer, UserImageSerializer
+from user.api.serializers.user_serializer import UserSerializer
 from general.utils.custom_exception import CustomException
 from general.utils import generate_response
-from user.models import User
+from user.models import User, UserProfile
 from user.api.utils import check_field, invalid_error, paginator
+from user.api.serializers.user_profile_srializer import UserProfileSerializer
 
 
 class UserAPI(APIView):
@@ -37,13 +38,17 @@ class UserAPI(APIView):
             profile_required_fields = ['Email', 'FirstName', 'LastName', 'ZipCode', 'NationalId', 'Information']
             self.check_field.check_field(input_data, profile_required_fields)
         if owner_type == 'Other':
-            user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
-            required_fields.append('user_id')
+            user_id = self.check_field.check_field(input_data=input_data, required_field='userId')
             user = self.get_object(user_id=user_id)
         if input_data.get('profile_update'):
-            profile_serializer = ProfileSerializer(user.profile, data=input_data)
+            if user.profile is not None:
+                profile_serializer = UserProfileSerializer(user.profile, data=input_data)
+            else:
+                profile_serializer = UserProfileSerializer(data=input_data)
             if profile_serializer.is_valid():
                 profile_serializer.save()
+                user_profile_instance = UserProfile.objects.get(id=profile_serializer.data.get('id'))
+                user.profile = user_profile_instance
             else:
                 self.invalid_error.invalid_serializer(profile_serializer.errors)
         serializer = self.serializer_class(user, data=input_data)
@@ -67,10 +72,21 @@ class UserAPI(APIView):
         if input_data.get('ProfileUpdate'):
             profile = user.profile
             if profile is not None:
-                profile_serializer = ProfileSerializer(profile, data=input_data, partial=True)
+                profile_serializer = UserProfileSerializer(profile, data=input_data, partial=True)
                 if not profile_serializer.is_valid():
                     self.invalid_error.invalid_serializer(serializer_error=profile_serializer.errors)
                 profile_serializer.save()
+            else:
+                check_fields = ['Email', 'FirstName', 'LastName', 'ZipCode', 'NationalId', 'Information', ]
+                for field in check_fields:
+                    if field not in input_data:
+                        input_data[field] = None
+                profile_serializer = UserProfileSerializer(data=input_data)
+                if not profile_serializer.is_valid():
+                    self.invalid_error.invalid_serializer(serializer_error=profile_serializer.errors)
+                profile_serializer.save()
+                user_profile_instance = UserProfile.objects.get(id=profile_serializer.data.get('id'))
+                user.profile = user_profile_instance
         serializer = self.serializer_class(user, data=request.data, partial=True)
         if not serializer.is_valid():
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
@@ -81,10 +97,10 @@ class UserAPI(APIView):
     def get(self, request, *args, **kwargs):
         input_data = request.data
         user = request.user
+        data = generate_response(keyword='OPERATION_DONE')
         owner_type = self.check_field.check_owner_type(input_data=input_data)
         if owner_type == 'Self':
             user_info = self.serializer_class(request.user).data
-            data = generate_response(keyword='OPERATION_DONE')
             data['userInfo'] = user_info
             return Response(data, status=data.get('statusCode'))
         if owner_type == 'Other':
@@ -97,12 +113,12 @@ class UserAPI(APIView):
                 pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
                 user_pagination = pagination.pagination_query(query_object=user, order_by_object='create_time')
                 user_info = self.serializer_class(user_pagination, many=True).data
-                user_info.append({"all_users_count": user.count()})
+                data['allUserCount'] = user.count()
+                # user_info.append({"all_users_count": user.count()})
             else:
                 user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
                 user = self.get_object(user_id=user_id)
                 user_info = self.serializer_class(user).data
-            data = generate_response(keyword='OPERATION_DONE')
             data['userInfo'] = user_info
             return Response(data, status=data.get('statusCode'))
 

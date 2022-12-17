@@ -415,5 +415,21 @@ responses = {
         "english_details": "file  added successfully.",
         "farsi_details": "فایل با موفقیت اضافه شد."
     },
+    "FILE_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "FILE_DELETED",
+        "error_code": 1022,
+        "english_details": "file  deleted successfully.",
+        "farsi_details": "فایل با موفقیت حذف شد."
+    },
+    "IMAGE_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "IMAGE_NOT_EXISTS",
+        "error_code": 1010,
+        "english_details": "image with these information does not exists.",
+        "farsi_details": "فایلی با اطلاعات وارد شده وجود ندارد."
+    },
 
 }
