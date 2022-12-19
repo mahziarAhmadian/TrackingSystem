@@ -12,5 +12,5 @@ class Permission(models.Model):
 
 """
     system permissions : 
-    AddType , EditType , DeleteType , EditUser , GetUserDetail , DeleteUser , 
+    AddType , EditType , DeleteType , EditUser , GetUserDetail , DeleteUser , AddProject, EditProject , DeleteProject
 """

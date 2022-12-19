@@ -427,9 +427,56 @@ responses = {
         "status": "failed",
         "status_code": 404,
         "summary": "IMAGE_NOT_EXISTS",
-        "error_code": 1010,
+        "error_code": 1023,
         "english_details": "image with these information does not exists.",
         "farsi_details": "فایلی با اطلاعات وارد شده وجود ندارد."
     },
-
+    "USER_TYPE_ERROR": {
+        "status": "failed",
+        "status_code": 403,
+        "summary": "USER_TYPE_ERROR",
+        "error_code": 1024,
+        "english_details": "This user does not have the required type to do this .",
+        "farsi_details": "این کاربر تایپ لازم برای انجام این کار را ندارد"
+    },
+    "USER_DONT_SET_TYPE": {
+        "status": "failed",
+        "status_code": 444,
+        "summary": "USER_DONT_SET_TYPE",
+        "error_code": 1025,
+        "english_details": "Please select a type first.",
+        "farsi_details": "لطفا ابتدا یک تایپ انتخاب کنید"
+    },
+    "PROJECT_CREATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PROJECT_CREATED",
+        "error_code": 1026,
+        "english_details": "project  created successfully.",
+        "farsi_details": "پروژه با موفقیت اضافه شد . "
+    },
+    "PROJECT_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "PROJECT_NOT_EXISTS",
+        "error_code": 1027,
+        "english_details": "project with these information does not exists.",
+        "farsi_details": "پروژه ای با اطلاعات وارد شده وجود ندارد."
+    },
+    "PROJECT_UPDATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PROJECT_UPDATED",
+        "error_code": 1028,
+        "english_details": "project  updated successfully.",
+        "farsi_details": "پروژه با موفقیت به روز رسانی شد . "
+    },
+    "PROJECT_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PROJECT_DELETED",
+        "error_code": 1029,
+        "english_details": "project  deleted successfully.",
+        "farsi_details": "پروژه با موفقیت حذف شد."
+    },
 }

@@ -7,3 +7,4 @@ from .reset_password import ResetPasswordAPI
 from .user_view import UserAPI
 from .user_type_view import UserTypeView
 from .image import UserImageView
+from .project_view import ProjectView

@@ -7,7 +7,6 @@ class InvalidError:
         errors = serializer_error.get('non_field_errors', None)
         if errors is None:
             errors = []
-            print(errors)
         extra_fields = {
             'errorList': errors
         }

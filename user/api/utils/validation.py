@@ -24,11 +24,18 @@ def is_national_id(string):
     return True
 
 
-def is_type(string):
-    try:
-        type_object = UserType.objects.get(id=string)
-    except:
-        return False
-    return True, type_object
+def is_type(string=None, type_english_name=None):
+    if type_english_name is not None:
+        type_object = UserType.objects.filter(english_name=type_english_name)
+        if type_object == 0:
+            return False
+        else:
+            return True
+    elif string is not None:
+        try:
+            type_object = UserType.objects.get(id=string)
+        except:
+            return False
+        return True, type_object
 
 # print(is_phone_number(None))

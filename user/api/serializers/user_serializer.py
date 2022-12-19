@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from user.models import User, UserImage
+from user.models import User, UserImage, UserType
 from . import TypeSerializer, UserImageSerializer
 from authorization.api.seializers.permissions_serializer import PermissionSerializer
 from user.api.serializers.user_profile_srializer import UserProfileSerializer
@@ -15,15 +15,19 @@ class UserSerializer(serializers.ModelSerializer):
     isSuperuser = serializers.BooleanField(source='is_superuser', required=False)
     Notes = serializers.CharField(source='notes', required=False, allow_blank=True)
     permissions = PermissionSerializer(many=True, read_only=True)
-    type = TypeSerializer(many=True, read_only=True)
+    userType = serializers.SerializerMethodField()
     profile = UserProfileSerializer(read_only=True)
     Images = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = ('Id', 'PhoneNumber', 'PhoneNumberIsValid', 'Blocked', 'isStaff', 'isActive', 'isSuperuser',
-                  'Notes', 'permissions', 'type', 'profile', 'Images')
+                  'Notes', 'permissions', 'userType', 'profile', 'Images')
 
     def get_Images(self, user):
         images = UserImage.objects.filter(user=user.id)
         return UserImageSerializer(images, many=True).data
+
+    def get_userType(self, user):
+        type_object = user.type
+        return TypeSerializer(type_object).data

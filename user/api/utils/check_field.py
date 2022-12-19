@@ -1,4 +1,6 @@
 from general.utils.custom_exception import CustomException
+from .validation import is_type
+from user.models.user import User
 
 
 class CheckField:
@@ -50,3 +52,29 @@ class CheckField:
                 'errorList': errors
             }
             raise CustomException(error_summary='PERMISSION_DENIED', extra_fields=extra_fields)
+
+    def check_user_type(self, user, required_type_english_name):
+        if user.type is None:
+            errors = []
+            extra_fields = {
+                'errorList': errors,
+            }
+            raise CustomException(error_summary='USER_DONT_SET_TYPE', extra_fields=extra_fields)
+
+        if user.type.english_name not in required_type_english_name:
+            errors = []
+            extra_fields = {
+                'errorList': errors,
+            }
+            raise CustomException(error_summary='USER_TYPE_ERROR', extra_fields=extra_fields)
+
+    def check_user_exist(self, user_id):
+        try:
+            user_obj = User.objects.get(id=user_id)
+        except:
+            errors = []
+            extra_fields = {
+                'errorList': errors
+            }
+            raise CustomException(error_summary='USER_NOT_EXISTS', extra_fields=extra_fields)
+        return user_obj

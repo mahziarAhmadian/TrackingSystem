@@ -24,3 +24,14 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(models.UserImage)
 class UserImageAdmin(admin.ModelAdmin):
     fields = ('user', 'sm_image', 'md_image', 'lg_image',)
+
+
+@admin.register(models.UserType)
+class UserTypeAdmin(admin.ModelAdmin):
+    fields = ('english_name', 'persian_name', 'information',)
+
+
+@admin.register(models.Project)
+class ProjectAdmin(admin.ModelAdmin):
+    fields = ('english_name', 'persian_name', 'image', 'location', 'location_range', 'started_from', 'deadline',
+              'contract_number', 'contract_information', 'information', 'create_time', 'owner', 'employer',)

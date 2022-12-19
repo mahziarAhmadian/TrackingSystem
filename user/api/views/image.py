@@ -33,7 +33,6 @@ class UserImageView(APIView):
         input_data['user'] = user.id
         serializer = self.serializer_class(data=input_data)
         if not serializer.is_valid():
-            print(serializer.errors)
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
         serializer.save()
         data = generate_response(keyword='FILE_ADDED')
