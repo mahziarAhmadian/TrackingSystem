@@ -8,7 +8,7 @@ from . import models
 class UserAdmin(admin.ModelAdmin):
     fields = ('phone_number', 'password', 'registered_at', 'is_active',
               'is_staff', 'is_superuser', 'phone_number_is_valid', 'blocked', 'last_login', 'permissions', 'notes',
-              'profile')
+              'profile', 'type')
 
 
 @admin.register(models.VerificationCode)

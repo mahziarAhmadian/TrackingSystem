@@ -1,4 +1,5 @@
 import re
+from user.models.user_type import UserType
 
 
 def is_email(string):
@@ -18,8 +19,16 @@ def is_phone_number(string):
         return True
     return False
 
+
 def is_national_id(string):
     return True
 
+
+def is_type(string):
+    try:
+        type_object = UserType.objects.get(id=string)
+    except:
+        return False
+    return True, type_object
 
 # print(is_phone_number(None))

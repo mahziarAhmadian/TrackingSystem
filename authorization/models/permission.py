@@ -9,3 +9,8 @@ class Permission(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+"""
+    system permissions : 
+    AddType , EditType , DeleteType , EditUser , GetUserDetail , DeleteUser , 
+"""
