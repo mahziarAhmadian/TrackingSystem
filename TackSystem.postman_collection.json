@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "35dfd088-9b8e-4619-8e26-d40a2944c9eb",
+		"_postman_id": "a760e23f-c72f-448d-aead-2744908fbd0a",
 		"name": "TackSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -62,7 +62,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"OwnerType\":\"Self\",\r\n    \"MethodType\":\"One\",\r\n    \"user_id\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
+									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"OwnerType\":\"Other\",\r\n    \"MethodType\":\"All\",\r\n    \"user_id\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -97,7 +97,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"UserID\":\"837caa92-bfde-46e7-9965-45eb36a18c86\",\r\n    \"Notes\":\"Edit\",\r\n    \"ProfileUpdate\":true,\r\n    \"LastName\":\"Ahf\"\r\n}",
+									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"UserID\":\"837caa92-bfde-46e7-9965-45eb36a18c86\",\r\n    \"isStaff\":true,\r\n    \"ProfileUpdate\":false,\r\n    \"LastName\":\"Ahf\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -221,7 +221,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"EnglishName\":\"BasicUser 2\",\r\n    \"PersianName\":\"کاربر\",\r\n    \"Information\":{}\r\n}",
+									"raw": "{\r\n    \"EnglishName\":\"MunicipalContractor\",\r\n    \"PersianName\":\"پیمانکار شهرادای\",\r\n    \"Information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -449,7 +449,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"password\": \"12345678\"\r\n}",
+									"raw": "{\r\n    \"phoneNumber\": \"09122594070\",\r\n    \"password\": \"12345678\",\r\n    \"userType\":\"a38845b9-f289-4521-896f-ca4fb1fad571\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -537,7 +537,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"email\": \"\",\r\n    \"verificationCode\": \"86309\",\r\n    \"codeType\": \"phoneVerification\"\r\n}",
+									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"email\": \"\",\r\n    \"verificationCode\": \"49199\",\r\n    \"codeType\": \"phoneVerification\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -646,6 +646,230 @@
 										"api",
 										"user",
 										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project",
+					"item": [
+						{
+							"name": "ProjectFile",
+							"item": [
+								{
+									"name": "Add",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{Track_admin}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{   \"projectId\":\"91b093a5-e590-45cb-a0d4-5c96c2538180\",\r\n    \"title\":\"\",\r\n    \"type\":\"\",\r\n    \"link\":null,\r\n    \"information\":{}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file",
+											"host": [
+												"{{Track_server}}"
+											],
+											"port": "{{Track_port}}",
+											"path": [
+												"api",
+												"user",
+												"project",
+												"file"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"englishName\":\"Project 2\",\r\n    \"persianName\":\"\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/project",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"user",
+										"project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"page\":1,\r\n   \"count\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/project",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"user",
+										"project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"projectId\":\"2678824f-151c-4b1d-b54d-101015534f75\",\r\n    \"employer\":null,\r\n    \"englishName\":\"Project-1\",\r\n    \"persianName\":\"پروژه اول\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/project",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"user",
+										"project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PartialUpdate",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"projectId\":\"2678824f-151c-4b1d-b54d-101015534f75\",\r\n    \"englishName\":\"Project\",\r\n    \"owner\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/project",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"user",
+										"project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"projectId\":\"0ab69f38-7eb1-4bc6-ab73-09f60ed370cd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/project",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"user",
+										"project"
 									]
 								}
 							},
