@@ -479,4 +479,12 @@ responses = {
         "english_details": "project  deleted successfully.",
         "farsi_details": "پروژه با موفقیت حذف شد."
     },
+    "PROJECT_DOCUMENT_CREATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PROJECT_DOCUMENT_CREATED",
+        "error_code": 1029,
+        "english_details": "project  document created successfully.",
+        "farsi_details": "فایل پروژه با موفقیت اضافه شد . "
+    },
 }

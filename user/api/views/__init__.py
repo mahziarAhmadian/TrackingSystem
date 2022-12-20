@@ -8,3 +8,4 @@ from .user_view import UserAPI
 from .user_type_view import UserTypeView
 from .image import UserImageView
 from .project_view import ProjectView
+from .project_document_view import ProjectDocumentView

@@ -5,6 +5,7 @@ from general.utils.custom_exception import CustomException
 from general.utils import generate_response
 from user.models import Project
 from ..utils import check_field, invalid_error, paginator
+import os
 
 
 class ProjectView(APIView):
@@ -84,7 +85,6 @@ class ProjectView(APIView):
             data = generate_response(keyword='PROJECT_UPDATED')
             return Response(data, status=data.get('statusCode'))
         else:
-            print(serializer.errors)
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
 
     def patch(self, request, *args, **kwargs):
@@ -113,7 +113,6 @@ class ProjectView(APIView):
             data = generate_response(keyword='PROJECT_UPDATED')
             return Response(data, status=data.get('statusCode'))
         else:
-            print(serializer.errors)
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
 
     def delete(self, request, *args, **kwargs):
@@ -127,6 +126,14 @@ class ProjectView(APIView):
         # check for required field should be in input data .
         self.check_field.check_field(input_data=input_data, required_field='projectId')
         project_obj = self.get_object(project_id=input_data.get('projectId'))
+        try:
+            if project_obj.image is not None:
+                file_path = project_obj.image.path
+                file_exist = os.path.exists(file_path)
+                if file_exist:
+                    os.remove(file_path)
+        except:
+            pass
         project_obj.delete()
         data = generate_response(keyword='PROJECT_DELETED')
         return Response(data, status=data.get('statusCode'))
@@ -138,10 +145,9 @@ class ProjectView(APIView):
         projects = self.get_object()
         paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
         paginated_data = paginator.pagination_query(query_object=projects, order_by_object='create_time')
-        serializer = self.serializer_class(paginated_data, many=True)
+        serializer = self.serializer_class(paginated_data, many=True, context={'request': request})
         project_info = serializer.data
         data = generate_response(keyword='OPERATION_DONE')
         data['allProjectsCount'] = projects.count()
         data['projectInfo'] = project_info
         return Response(data, status=data.get('statusCode'))
-        # return Response({"Message": "Test"})

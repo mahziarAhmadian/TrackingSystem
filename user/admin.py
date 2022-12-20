@@ -35,3 +35,8 @@ class UserTypeAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     fields = ('english_name', 'persian_name', 'image', 'location', 'location_range', 'started_from', 'deadline',
               'contract_number', 'contract_information', 'information', 'create_time', 'owner', 'employer',)
+
+
+@admin.register(models.ProjectDocument)
+class ProjectDocumentAdmin(admin.ModelAdmin):
+    fields = ('title', 'type', 'link', 'information', 'create_time', 'project',)

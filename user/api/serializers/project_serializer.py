@@ -3,16 +3,11 @@ from user.models import Project, User
 from user.api.serializers.user_serializer import UserSerializer
 from general.utils.custom_exception import CustomException
 
-"""
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='onwer', null=True, blank=True)
-    employer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='employer')
-"""
-
 
 class ProjectSerializer(serializers.ModelSerializer):
     englishName = serializers.CharField(source='english_name', required=True, allow_blank=True)
     persianName = serializers.CharField(source='persian_name', required=True, allow_blank=True)
-    image = serializers.ImageField(allow_null=True)
+    image = serializers.ImageField(allow_null=True, use_url=True)
     location = serializers.CharField(max_length=255, allow_blank=True)
     locationRange = serializers.JSONField(source='location_range', allow_null=True)
     startedFrom = serializers.DateTimeField(source='started_from')
@@ -25,7 +20,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'englishName', 'persianName', 'image', 'location', 'locationRange', 'startedFrom', 'deadline',
+        fields = ('id', 'englishName', 'image', 'persianName', 'location', 'locationRange', 'startedFrom', 'deadline',
                   'contractNumber', 'contractInformation', 'information', 'employerInfo', 'ownerInfo')
 
     def get_employerInfo(self, project):
@@ -47,3 +42,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         for field in pop_field:
             result.pop(field)
         return result
+
+
+    # def to_representation(self, instance):
+    #     request = self.context
+    #     rep = super().to_representation(instance)
+    #     req = request.get('request')
+    #     return rep

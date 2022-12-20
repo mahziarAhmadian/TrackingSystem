@@ -12,6 +12,7 @@ urlpatterns = [
     path('type', views.UserTypeView.as_view(), name='system types'),
     path('file', views.UserImageView.as_view(), name='users file'),
     # project api
-    path('project', views.ProjectView.as_view(), name='users file'),
-
+    path('project', views.ProjectView.as_view(), name='project'),
+    # project document api
+    path('project/file', views.ProjectDocumentView.as_view(), name='project file'),
 ]
