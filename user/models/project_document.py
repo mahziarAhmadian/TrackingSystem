@@ -11,6 +11,7 @@ class ProjectDocument(models.Model):
         ('D', 'docx'),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    file = models.FileField(null=True)
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=80, choices=TYPE_CHOICES)
     link = models.URLField(null=True, blank=True)

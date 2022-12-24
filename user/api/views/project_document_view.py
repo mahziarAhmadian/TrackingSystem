@@ -9,13 +9,15 @@ from .project_view import ProjectView
 
 class ProjectDocumentView(APIView):
     # TODO project_document.link must match with front dev .
+    # TODO fix with front for file field , if file field null should be sent res with row , if file field not null
+    #  should send with form-data.
     serializer_class = ProjectDocumentSerializer
     check_field = check_field.CheckField()
     invalid_error = invalid_error.InvalidError()
     project = ProjectView()
 
     def post(self, request, *args, **kwargs):
-        input_data = request.data
+        input_data = {k: v for k, v in request.data.items()}
         user = request.user
         # check user type for create new project .
         required_type_english_name = ['system_administrator', 'municipal_employer']
@@ -23,7 +25,7 @@ class ProjectDocumentView(APIView):
         # check user permission for add new project to system .
         self.check_field.check_user_permission(user=user, user_permission_name='AddProject')
         # check for required field should be in input data .
-        required_fields = ['title', 'type', 'link', 'information', 'projectId']
+        required_fields = ['file', 'title', 'type', 'link', 'information', 'projectId']
         self.check_field.check_field(input_data=input_data, required_fields=required_fields)
         project_obj = self.project.get_object(project_id=input_data.get('projectId'))
         input_data['project'] = project_obj.id
@@ -33,4 +35,5 @@ class ProjectDocumentView(APIView):
             data = generate_response(keyword='PROJECT_DOCUMENT_CREATED')
             return Response(data, status=data.get('statusCode'))
         else:
+            print(serializer.errors)
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
