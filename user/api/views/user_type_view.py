@@ -13,9 +13,10 @@ class UserTypeView(APIView):
     invalid_error = invalid_error.InvalidError()
     pagination_class = paginator.CustomPaginator
 
-    def get_object(self, type_id=None):
+    def get_object(self, type_id=None, filters=None):
         if type_id is None:
-            types = UserType.objects.all()
+            filters = {k: v for k, v in filters.items() if v is not None}
+            types = UserType.objects.filter(**filters)
             return types
         try:
             type = UserType.objects.get(id=type_id)
@@ -45,10 +46,15 @@ class UserTypeView(APIView):
 
     def get(self, request, *args, **kwargs):
         input_data = request.data
-        required_fields = ['page', 'count']
+        required_fields = ['page', 'count', 'EnglishName', 'PersianName']
         self.check_field.check_field(required_fields=required_fields, input_data=input_data)
         paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
-        paginated_data = paginator.pagination_query(query_object=self.get_object(), order_by_object='create_time')
+        filters = {
+            'english_name': input_data.get('EnglishName'),
+            'persian_name': input_data.get('PersianName')
+        }
+        types = self.get_object(filters=filters)
+        paginated_data = paginator.pagination_query(query_object=types, order_by_object='create_time')
         serializer = self.serializer_class(paginated_data, many=True)
         type_info = serializer.data
         data = generate_response(keyword='OPERATION_DONE')
@@ -79,4 +85,3 @@ class UserTypeView(APIView):
         type_object.delete()
         data = generate_response(keyword='TYPE_DELETED')
         return Response(data, status=data.get('statusCode'))
-

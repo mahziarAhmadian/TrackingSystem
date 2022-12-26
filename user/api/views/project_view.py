@@ -14,7 +14,7 @@ class ProjectView(APIView):
     invalid_error = invalid_error.InvalidError()
     pagination_class = paginator.CustomPaginator
 
-    def get_object(self, project_id=None):
+    def get_object(self, project_id=None, filters=None):
         if project_id is not None:
             try:
                 project_obj = Project.objects.get(id=project_id)
@@ -26,7 +26,8 @@ class ProjectView(APIView):
                 raise CustomException(error_summary='PROJECT_NOT_EXISTS', extra_fields=extra_fields)
             return project_obj
         else:
-            projects = Project.objects.all()
+            filters = {k: v for k, v in filters.items() if v is not None}
+            projects = Project.objects.filter(**filters)
             return projects
 
     def post(self, request, *args, **kwargs):
@@ -140,9 +141,18 @@ class ProjectView(APIView):
 
     def get(self, request, *args, **kwargs):
         input_data = request.data
-        required_fields = ['page', 'count']
+        user = request.user
+        # check user permission for add new project to system .
+        self.check_field.check_user_permission(user=user, user_permission_name='GetProject')
+        required_fields = ['page', 'count', 'englishName', 'persianName', 'contractNumber', 'employerNumber']
         self.check_field.check_field(required_fields=required_fields, input_data=input_data)
-        projects = self.get_object()
+        filters = {
+            'english_name': input_data['englishName'],
+            'persian_name': input_data['persianName'],
+            'contract_number': input_data['contractNumber'],
+            'employer__phone_number': input_data['employerNumber'],
+        }
+        projects = self.get_object(filters=filters)
         paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
         paginated_data = paginator.pagination_query(query_object=projects, order_by_object='create_time')
         serializer = self.serializer_class(paginated_data, many=True, context={'request': request})

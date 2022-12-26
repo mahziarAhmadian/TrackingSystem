@@ -14,9 +14,10 @@ class UserAPI(APIView):
     check_field = check_field.CheckField()
     invalid_error = invalid_error.InvalidError()
 
-    def get_object(self, user_id=None):
+    def get_object(self, user_id=None, filters=None):
         if user_id is None:
-            user = User.objects.all()
+            filters = {k: v for k, v in filters.items() if v is not None}
+            user = User.objects.filter(**filters)
         else:
             try:
                 user = User.objects.get(id=user_id)
@@ -107,13 +108,19 @@ class UserAPI(APIView):
             self.check_field.check_user_permission(user=user, user_permission_name='GetUserDetail')
             method_type = self.check_field.method_type_check(input_data=input_data)
             if method_type == 'All':
-                required_fields = ['page', 'count']
+                required_fields = ['page', 'count', 'PhoneNumber', 'isStaff', 'isActive', 'isSuperuser']
                 self.check_field.check_field(input_data=input_data, required_fields=required_fields)
-                user = self.get_object(user_id=None)
+                filters = {
+                    'phone_number': input_data.get('PhoneNumber'),
+                    'is_staff': input_data.get('isStaff'),
+                    'is_active': input_data.get('isActive'),
+                    'is_superuser': input_data.get('isSuperuser'),
+                }
+                users = self.get_object(user_id=None, filters=filters)
                 pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
-                user_pagination = pagination.pagination_query(query_object=user, order_by_object='create_time')
-                user_info = self.serializer_class(user_pagination, many=True).data
-                data['allUserCount'] = user.count()
+                users_pagination = pagination.pagination_query(query_object=users, order_by_object='create_time')
+                user_info = self.serializer_class(users_pagination, many=True).data
+                data['allUserCount'] = users.count()
                 # user_info.append({"all_users_count": user.count()})
             else:
                 user_id = self.check_field.check_field(input_data=input_data, required_field='user_id')
