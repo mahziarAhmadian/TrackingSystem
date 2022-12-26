@@ -62,7 +62,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"OwnerType\":\"Other\",\r\n    \"MethodType\":\"All\",\r\n    \"user_id\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
+									"raw": "{\r\n    \"OwnerType\":\"Other\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"PhoneNumber\":null,\r\n    \"isStaff\":null,\r\n    \"isActive\":null,\r\n    \"isSuperuser\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -259,7 +259,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10\r\n}",
+									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":null,\r\n    \"PersianName\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -790,7 +790,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"page\":1,\r\n   \"count\":10\r\n}",
+									"raw": "{\r\n   \"page\":1,\r\n   \"count\":10,\r\n   \"englishName\":null,\r\n   \"persianName\":null,\r\n   \"contractNumber\":null,\r\n   \"employerNumber\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
