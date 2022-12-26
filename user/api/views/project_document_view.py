@@ -8,7 +8,6 @@ from .project_view import ProjectView
 
 
 class ProjectDocumentView(APIView):
-    # TODO project_document.link must match with front dev .
     # TODO fix with front for file field , if file field null should be sent res with row , if file field not null
     #  should send with form-data.
     serializer_class = ProjectDocumentSerializer
