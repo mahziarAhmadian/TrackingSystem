@@ -16,6 +16,14 @@ class ProjectDocumentView(APIView):
     invalid_error = invalid_error.InvalidError()
     project = ProjectView()
 
+    def get_queryset(self, **kwargs):
+        filters = {k: v for k, v in kwargs.items()}
+        try:
+            documents = ProjectDocument.objects.filter(**filters)
+        except:
+            documents = []
+        return documents
+
     def post(self, request, *args, **kwargs):
         input_data = {k: v for k, v in request.data.items()}
         user = request.user
@@ -37,3 +45,23 @@ class ProjectDocumentView(APIView):
         else:
             print(serializer.errors)
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
+
+    def get(self, request, *args, **kwargs):
+        input_data = request.data
+        user = request.user
+        # check user type for create new project .
+        required_type_english_name = ['system_administrator', 'municipal_employer']
+        self.check_field.check_user_type(user=user, required_type_english_name=required_type_english_name)
+        # check user permission for add new project to system .
+        self.check_field.check_user_permission(user=user, user_permission_name='GetProjectDocuments')
+        # check for required field should be in input data .
+        required_fields = ['projectId']
+        self.check_field.check_field(input_data=input_data, required_fields=required_fields)
+        project_obj = self.project.get_object(project_id=input_data.get('projectId'))
+        docs = self.get_queryset(project=project_obj.id)
+        serializer = self.serializer_class(docs, many=True)
+        documents = serializer.data
+        data = generate_response(keyword='OPERATION_DONE')
+        data['allProjectsDocumentsCount'] = docs.count()
+        data['projectDocuments'] = documents
+        return Response(data, status=data.get('statusCode'))

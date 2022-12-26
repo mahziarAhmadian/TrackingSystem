@@ -10,7 +10,7 @@ urlpatterns = [
     path('reset-password', views.ResetPasswordAPI.as_view(), name='reset-password-api'),
     path('profile', views.UserAPI.as_view(), name='user profile'),
     path('type/', views.UserTypeView.as_view(), name='system types'),
-    path('file/', views.UserImageView.as_view(), name='users file'),
+    path('file', views.UserImageView.as_view(), name='users file'),
     # project api
     path('project/', views.ProjectView.as_view(), name='project'),
     # project document api

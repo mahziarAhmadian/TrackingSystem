@@ -14,10 +14,12 @@ class ProjectDocument(models.Model):
     file = models.FileField(null=True)
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=80, choices=TYPE_CHOICES)
-    link = models.URLField(null=True, blank=True)
+    # link = models.URLField(null=True, blank=True)
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return "documents : {} for project {}-{} ".format(self.title, self.project.persian_name,

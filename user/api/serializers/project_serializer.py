@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from user.models import Project, User
+from user.models import Project, User, ProjectDocument
 from user.api.serializers.user_serializer import UserSerializer
+from user.api.serializers.project_document_serializer import ProjectDocumentSerializer
 from general.utils.custom_exception import CustomException
 
 
@@ -17,11 +18,13 @@ class ProjectSerializer(serializers.ModelSerializer):
     information = serializers.JSONField()
     employerInfo = serializers.SerializerMethodField()
     ownerInfo = serializers.SerializerMethodField()
+    projectDocuments = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
         fields = ('id', 'englishName', 'image', 'persianName', 'location', 'locationRange', 'startedFrom', 'deadline',
-                  'contractNumber', 'contractInformation', 'information', 'employerInfo', 'ownerInfo')
+                  'contractNumber', 'contractInformation', 'information', 'employerInfo', 'ownerInfo',
+                  'projectDocuments')
 
     def get_employerInfo(self, project):
         user = User.objects.get(id=project.employer.id)
@@ -43,9 +46,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             result.pop(field)
         return result
 
-
-    # def to_representation(self, instance):
-    #     request = self.context
-    #     rep = super().to_representation(instance)
-    #     req = request.get('request')
-    #     return rep
+    def get_projectDocuments(self, project):
+        documents = ProjectDocument.objects.filter(project=project.id)
+        result = ProjectDocumentSerializer(documents, many=True).data
+        return result

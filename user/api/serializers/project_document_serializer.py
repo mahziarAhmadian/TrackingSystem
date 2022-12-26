@@ -6,7 +6,7 @@ class ProjectDocumentSerializer(serializers.ModelSerializer):
     title = serializers.CharField(allow_blank=True)
     type = serializers.CharField(allow_blank=True)
     link = serializers.URLField(allow_null=True, allow_blank=True)
-    file = serializers.FileField(allow_null=True, allow_empty_file=True)
+    file = serializers.FileField(allow_null=True, allow_empty_file=True, use_url=True)
     information = serializers.JSONField()
 
     class Meta:

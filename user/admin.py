@@ -39,4 +39,4 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(models.ProjectDocument)
 class ProjectDocumentAdmin(admin.ModelAdmin):
-    fields = ('title', 'type', 'link', 'information', 'create_time', 'project',)
+    fields = ('title', 'type', 'file', 'link', 'information', 'create_time', 'project',)
