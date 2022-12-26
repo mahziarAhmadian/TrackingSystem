@@ -487,4 +487,36 @@ responses = {
         "english_details": "project  document created successfully.",
         "farsi_details": "فایل پروژه با موفقیت اضافه شد . "
     },
+    "PROJECT_DOCUMENT_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "PROJECT_DOCUMENT_NOT_EXISTS",
+        "error_code": 1030,
+        "english_details": "project_document with these information does not exists.",
+        "farsi_details": "فایل پروژه ای با اطلاعات وارد شده وجود ندارد."
+    },
+    "PROJECT_DOCUMENT_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PROJECT_DOCUMENT_DELETED",
+        "error_code": 1031,
+        "english_details": "project document deleted successfully.",
+        "farsi_details": "فایل پروژه با موفقیت حذف شد."
+    },
+    "YOUR_TYPE_IS_NOT_VALID": {
+        "status": "failed",
+        "status_code": 444,
+        "summary": "YOUR_TYPE_IS_NOT_VALID",
+        "error_code": 1032,
+        "english_details": "The type you selected is not allowed",
+        "farsi_details": "تایپ انتخابی شما مجاز نیست."
+    },
+    "YOUR_FILE_TYPE_NOT_MATCH_WITH_INPUT_TYPE": {
+        "status": "failed",
+        "status_code": 444,
+        "summary": "YOUR_FILE_TYPE_NOT_MATCH_WITH_INPUT_TYPE",
+        "error_code": 1032,
+        "english_details": "The file type is not the same as the selected type",
+        "farsi_details": "تایپ فایل با تایپ انتخابی یکی نیست"
+    },
 }

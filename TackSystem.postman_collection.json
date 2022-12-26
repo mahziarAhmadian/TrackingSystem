@@ -671,8 +671,39 @@
 											}
 										],
 										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"projectId\":\"21e2da75-6652-4c40-8186-5871cebb5dd2\",\r\n    \"file\":null,\r\n    \"title\":\"file2\",\r\n    \"type\":\"\",\r\n    \"link\":\"\",\r\n    \"information\":{}\r\n}",
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "projectId",
+													"value": "21e2da75-6652-4c40-8186-5871cebb5dd2",
+													"type": "default"
+												},
+												{
+													"key": "title",
+													"value": "p2",
+													"type": "default"
+												},
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/C:/Users/pc/Documents/media/counter2.46aa3d1a.jpg"
+												},
+												{
+													"key": "type",
+													"value": ".jpg",
+													"type": "default"
+												},
+												{
+													"key": "link",
+													"value": "null",
+													"type": "default"
+												},
+												{
+													"key": "information",
+													"value": "{\"\":\"\"}",
+													"type": "default"
+												}
+											],
 											"options": {
 												"raw": {
 													"language": "json"
@@ -713,6 +744,43 @@
 										"body": {
 											"mode": "raw",
 											"raw": "{\r\n    \"projectId\":\"21e2da75-6652-4c40-8186-5871cebb5dd2\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file/",
+											"host": [
+												"{{Track_server}}"
+											],
+											"port": "{{Track_port}}",
+											"path": [
+												"api",
+												"user",
+												"project",
+												"file",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{Track_admin}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"projectDocumentId\":\"e793e808-bba5-47da-8953-3b1dbf7a1972\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"

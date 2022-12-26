@@ -5,6 +5,8 @@ from general.utils import generate_response
 from user.models import ProjectDocument
 from ..utils import check_field, invalid_error
 from .project_view import ProjectView
+from general.utils.custom_exception import CustomException
+from general.utils.delete_file import DeleteFile
 
 
 class ProjectDocumentView(APIView):
@@ -14,14 +16,26 @@ class ProjectDocumentView(APIView):
     check_field = check_field.CheckField()
     invalid_error = invalid_error.InvalidError()
     project = ProjectView()
+    delete_file = DeleteFile()
 
     def get_queryset(self, **kwargs):
-        filters = {k: v for k, v in kwargs.items()}
-        try:
-            documents = ProjectDocument.objects.filter(**filters)
-        except:
-            documents = []
-        return documents
+        if 'id' in kwargs:
+            try:
+                doc = ProjectDocument.objects.get(id=kwargs['id'])
+                return doc
+            except:
+                errors = []
+                extra_fields = {
+                    'errorList': errors,
+                }
+                raise CustomException(error_summary='PROJECT_DOCUMENT_NOT_EXISTS', extra_fields=extra_fields)
+        else:
+            filters = {k: v for k, v in kwargs.items()}
+            try:
+                documents = ProjectDocument.objects.filter(**filters)
+            except:
+                documents = []
+            return documents
 
     def post(self, request, *args, **kwargs):
         input_data = {k: v for k, v in request.data.items()}
@@ -63,4 +77,21 @@ class ProjectDocumentView(APIView):
         data = generate_response(keyword='OPERATION_DONE')
         data['allProjectsDocumentsCount'] = docs.count()
         data['projectDocuments'] = documents
+        return Response(data, status=data.get('statusCode'))
+
+    def delete(self, request, *args, **kwargs):
+        input_data = request.data
+        user = request.user
+        # check user permission for delete  project document from system .
+        self.check_field.check_user_permission(user=user, user_permission_name='DeleteProjectDocument')
+        # check for required field should be in input data .
+        self.check_field.check_field(input_data=input_data, required_field='projectDocumentId')
+        project_document_obj = self.get_queryset(id=input_data.get('projectDocumentId'))
+        try:
+            document_file_path = project_document_obj.file.path
+            self.delete_file.delete(file_path=document_file_path)
+        except:
+            pass
+        project_document_obj.delete()
+        data = generate_response(keyword='PROJECT_DOCUMENT_DELETED')
         return Response(data, status=data.get('statusCode'))
