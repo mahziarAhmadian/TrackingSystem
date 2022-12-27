@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ok8o=6*x%pl+5s+_2j2j!k19^&w)n#lv7kf1f)h#c$wio6b5p#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '185.94.96.200']
 
 # Application definition
 
@@ -227,3 +227,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 HANDLE_ERROR_FROM = "RAM"  # other option: DB
+APPEND_SLASH = False

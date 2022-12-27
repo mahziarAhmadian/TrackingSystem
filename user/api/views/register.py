@@ -8,7 +8,6 @@ from user.api.utils import VerificationSender
 
 
 class RegisterAPI(APIView):
-
     authentication_classes = get_authetication_classes(api='register')
     serializer_class = RegisterSerializer
     verification_sender = VerificationSender()
@@ -16,6 +15,7 @@ class RegisterAPI(APIView):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
+            print(serializer.errors)
             errors = serializer.errors.get('non_field_errors', None)
             if errors is None:
                 errors = []

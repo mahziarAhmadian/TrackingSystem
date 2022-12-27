@@ -38,7 +38,8 @@ class ProjectDocumentView(APIView):
             return documents
 
     def post(self, request, *args, **kwargs):
-        input_data = {k: v for k, v in request.data.items()}
+        # input_data = {k: v for k, v in request.data.items()}
+        input_data = request.data
         user = request.user
         # check user type for create new project .
         required_type_english_name = ['system_administrator', 'municipal_employer']

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aed63838-1fd7-4aab-973c-7ba238f5206a",
+		"_postman_id": "1d2ec5c4-61be-4224-a172-d0ddf4a4641c",
 		"name": "TackSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -62,7 +62,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"OwnerType\":\"Other\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"PhoneNumber\":null,\r\n    \"isStaff\":null,\r\n    \"isActive\":null,\r\n    \"isSuperuser\":null\r\n}",
+									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"PhoneNumber\":\"09356165600\",\r\n    \"isStaff\":null,\r\n    \"isActive\":null,\r\n    \"isSuperuser\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -97,7 +97,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"UserID\":\"837caa92-bfde-46e7-9965-45eb36a18c86\",\r\n    \"isStaff\":true,\r\n    \"ProfileUpdate\":false,\r\n    \"LastName\":\"Ahf\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -135,7 +135,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"OwnerType\":\"Other\",\r\n    \"userId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\",\r\n    \"Notes\":\"\",\r\n    \"profile_update\":true,\r\n    \"FirstName\":\"Majid\",\r\n    \"LastName\":\"ahmadian\",\r\n    \"ZipCode\":null,\r\n    \"NationalId\":null,\r\n    \"Email\":null,\r\n    \"Information\":null\r\n}",
+									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"userId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\",\r\n    \"Notes\":\"\",\r\n    \"isStaff\":true,\r\n    \"isActive\":true,\r\n    \"isSuperuser\":true,\r\n    \"profile_update\":true,\r\n    \"FirstName\":\"Mahziar\",\r\n    \"LastName\":\"ahmadian\",\r\n    \"ZipCode\":null,\r\n    \"NationalId\":null,\r\n    \"Email\":null,\r\n    \"Information\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -221,7 +221,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"EnglishName\":\"MunicipalContractor\",\r\n    \"PersianName\":\"پیمانکار شهرادای\",\r\n    \"Information\":{}\r\n}",
+									"raw": "{\r\n    \"EnglishName\":\"Driver\",\r\n    \"PersianName\":\"راننده\",\r\n    \"Information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -259,7 +259,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":null,\r\n    \"PersianName\":null\r\n}",
+									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":\"Dr\",\r\n    \"PersianName\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -294,7 +294,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Id\":\"e421be91-a4a5-4453-b401-a3cab4bae86e\",\r\n    \"EnglishName\":\"BasicUser\"\r\n}",
+									"raw": "{\r\n    \"Id\":\"e001aaf7-0440-47b5-b1e2-8df4cdbf266d\",\r\n    \"EnglishName\":\"Driver\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -373,7 +373,7 @@
 										{
 											"key": "SmImage",
 											"type": "file",
-											"src": "/C:/Users/pc/Documents/media/counter2.46aa3d1a.jpg"
+											"src": "/C:/Users/Asus/Documents/SNE6.jpg"
 										},
 										{
 											"key": "MdImage",
@@ -415,7 +415,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"imageId\":\"be948fc8-f055-403d-b871-e020a1e2a4de\"\r\n}",
+									"raw": "{\r\n    \"imageId\":\"31402522-7ec7-4d8f-a427-9cd20c796bb8\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -449,7 +449,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"phoneNumber\": \"09122594070\",\r\n    \"password\": \"12345678\",\r\n    \"userType\":\"a38845b9-f289-4521-896f-ca4fb1fad571\"\r\n}",
+									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"password\": \"12345678\",\r\n    \"userType\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -537,7 +537,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"email\": \"\",\r\n    \"verificationCode\": \"49199\",\r\n    \"codeType\": \"phoneVerification\"\r\n}",
+									"raw": "{\r\n    \"phoneNumber\": \"09356165600\",\r\n    \"email\": \"\",\r\n    \"verificationCode\": \"55477\",\r\n    \"codeType\": \"phoneVerification\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -675,7 +675,7 @@
 											"formdata": [
 												{
 													"key": "projectId",
-													"value": "21e2da75-6652-4c40-8186-5871cebb5dd2",
+													"value": "1e4130ac-e5b3-4fb0-b138-271bd779b5be",
 													"type": "default"
 												},
 												{
@@ -686,7 +686,7 @@
 												{
 													"key": "file",
 													"type": "file",
-													"src": "/C:/Users/pc/Documents/media/counter2.46aa3d1a.jpg"
+													"src": "/C:/Users/Asus/Documents/SNE5.jpg"
 												},
 												{
 													"key": "type",
@@ -711,7 +711,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file/",
+											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file",
 											"host": [
 												"{{Track_server}}"
 											],
@@ -720,8 +720,7 @@
 												"api",
 												"user",
 												"project",
-												"file",
-												""
+												"file"
 											]
 										}
 									},
@@ -743,7 +742,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"projectId\":\"21e2da75-6652-4c40-8186-5871cebb5dd2\"\r\n}",
+											"raw": "{\r\n    \"projectId\":\"1e4130ac-e5b3-4fb0-b138-271bd779b5be\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -751,7 +750,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file/",
+											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file",
 											"host": [
 												"{{Track_server}}"
 											],
@@ -760,8 +759,7 @@
 												"api",
 												"user",
 												"project",
-												"file",
-												""
+												"file"
 											]
 										}
 									},
@@ -780,7 +778,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"projectDocumentId\":\"e793e808-bba5-47da-8953-3b1dbf7a1972\"\r\n}",
+											"raw": "{\r\n    \"projectDocumentId\":\"1236fe82-67c8-4a6f-83a1-2e2193b59aca\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -788,7 +786,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file/",
+											"raw": "{{Track_server}}:{{Track_port}}/api/user/project/file",
 											"host": [
 												"{{Track_server}}"
 											],
@@ -797,8 +795,7 @@
 												"api",
 												"user",
 												"project",
-												"file",
-												""
+												"file"
 											]
 										}
 									},
@@ -819,7 +816,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"englishName\":\"Project\",\r\n    \"persianName\":\"\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
+									"raw": "{\r\n    \"englishName\":\"Tehran\",\r\n    \"persianName\":\"تهران\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -893,7 +890,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"projectId\":\"2678824f-151c-4b1d-b54d-101015534f75\",\r\n    \"employer\":null,\r\n    \"englishName\":\"Project-1\",\r\n    \"persianName\":\"پروژه اول\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
+									"raw": "{\r\n    \"projectId\":\"1e4130ac-e5b3-4fb0-b138-271bd779b5be\",\r\n    \"employer\":null,\r\n    \"englishName\":\"TehranE\",\r\n    \"persianName\":\"تهران\",\r\n    \"image\":null,\r\n    \"location\":\"\",\r\n    \"locationRange\":\"\",\r\n    \"startedFrom\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"deadline\":\"2022-12-19T14:29:17.722520Z\",\r\n    \"contractNumber\":\"\",\r\n    \"contractInformation\":\"\",\r\n    \"information\":\"\",\r\n    \"owner\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -928,7 +925,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"projectId\":\"2678824f-151c-4b1d-b54d-101015534f75\",\r\n    \"englishName\":\"Project\",\r\n    \"owner\":null\r\n}",
+									"raw": "{\r\n    \"projectId\":\"1e4130ac-e5b3-4fb0-b138-271bd779b5be\",\r\n    \"englishName\":\"Tehran\",\r\n    \"owner\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

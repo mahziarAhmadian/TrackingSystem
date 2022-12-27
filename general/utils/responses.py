@@ -509,7 +509,8 @@ responses = {
         "summary": "YOUR_TYPE_IS_NOT_VALID",
         "error_code": 1032,
         "english_details": "The type you selected is not allowed",
-        "farsi_details": "تایپ انتخابی شما مجاز نیست."
+        "farsi_details": "تایپ انتخابی شما مجاز نیست.",
+        "valid_types": ['.pdf', '.doc', '.docx', '.jpg', '.png', '.xlsx', '.xls']
     },
     "YOUR_FILE_TYPE_NOT_MATCH_WITH_INPUT_TYPE": {
         "status": "failed",

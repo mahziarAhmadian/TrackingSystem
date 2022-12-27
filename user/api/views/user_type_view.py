@@ -50,14 +50,16 @@ class UserTypeView(APIView):
         self.check_field.check_field(required_fields=required_fields, input_data=input_data)
         paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
         filters = {
-            'english_name': input_data.get('EnglishName'),
-            'persian_name': input_data.get('PersianName')
+            'english_name__icontains': input_data.get('EnglishName'),
+            'persian_name__icontains': input_data.get('PersianName')
         }
         types = self.get_object(filters=filters)
+        all_types_count = types.count()
         paginated_data = paginator.pagination_query(query_object=types, order_by_object='create_time')
         serializer = self.serializer_class(paginated_data, many=True)
         type_info = serializer.data
         data = generate_response(keyword='OPERATION_DONE')
+        data['all_types_count'] = all_types_count
         data['typeInfo'] = type_info
         return Response(data, status=data.get('statusCode'))
 

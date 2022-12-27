@@ -18,7 +18,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     # required True checked on validation code by my self
     phoneNumber = serializers.CharField(source='phone_number', required=False)
     password = PasswordField()
-    userType = serializers.CharField(source='type', required=True)
+    userType = serializers.CharField(source='type', required=False,allow_null=True,allow_blank=True)
 
     class Meta:
         model = User
@@ -50,7 +50,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def _validate_type(self, user_type):
         if user_type is None:
-            return {"error": True, "value": 'USER_TYPE_REQUIRED'}
+            return {"error": False, "value": None}
         is_type_response = is_type(user_type)
         print(f"is type response is : {is_type_response}")
         if is_type_response:
