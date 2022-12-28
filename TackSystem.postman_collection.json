@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1d2ec5c4-61be-4224-a172-d0ddf4a4641c",
+		"_postman_id": "3a7fef00-6f6d-49fa-ace8-2f620f6ff5d2",
 		"name": "TackSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -357,7 +357,7 @@
 					"name": "UserImage",
 					"item": [
 						{
-							"name": "AddFile",
+							"name": "Create",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -369,23 +369,12 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "SmImage",
-											"type": "file",
-											"src": "/C:/Users/Asus/Documents/SNE6.jpg"
-										},
-										{
-											"key": "MdImage",
-											"type": "file",
-											"src": []
-										},
-										{
-											"key": "LgImage",
-											"type": "file",
-											"src": []
+									"formdata": [],
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "{{Track_server}}:{{Track_port}}/api/user/file",
@@ -977,6 +966,234 @@
 										"api",
 										"user",
 										"project"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "TrackApp",
+			"item": [
+				{
+					"name": "Module",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"moduleOne\",\r\n    \"serialNumber\":\"1234\",\r\n    \"information\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/module",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"module"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PartialUpdate",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"moduleId\":\"3ddf170c-6e98-4ea1-b72b-f2bb3d771b71\",\r\n   \"name\":\"moduleTwo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/module",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"module"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"moduleId\":\"a3732175-3b7d-4d93-9c2d-3f1c0cb0725e\",\r\n   \"name\":\"moduleOneEdited\",\r\n   \"information\":{\"Message\":\"this is test message\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/module",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"module"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"moduleId\":\"3ddf170c-6e98-4ea1-b72b-f2bb3d771b71\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/module",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"module"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CommentForFrontDev\":\"if your methodType is not set on 'One' you dont need to add 'moduleId in body of your request.'\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":100,\r\n    \"name\":null,\r\n    \"serialNumber\":null,\r\n    \"moduleId\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/module",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"module"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Meter",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"a3732175-3b7d-4d93-9c2d-3f1c0cb0725e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meter",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meter"
 									]
 								}
 							},
