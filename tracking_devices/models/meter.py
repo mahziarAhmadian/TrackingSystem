@@ -11,6 +11,7 @@ class Meter(models.Model):
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
     module = models.OneToOneField(Module, on_delete=models.CASCADE)
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return "{} - {} ".format(self.name, self.serial_number)

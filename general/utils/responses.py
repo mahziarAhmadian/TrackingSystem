@@ -520,4 +520,44 @@ responses = {
         "english_details": "The file type is not the same as the selected type",
         "farsi_details": "تایپ فایل با تایپ انتخابی یکی نیست"
     },
+    "MODULE_ADDED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "MODULE_ADDED",
+        "error_code": 1033,
+        "english_details": "module  added successfully.",
+        "farsi_details": "ماژول با موفقیت اضافه شد."
+    },
+    "SERIAL_NUMBER_IS_NOT_UNIQUE": {
+        "status": "failed",
+        "status_code": 409,
+        "summary": "SERIAL_NUMBER_IS_NOT_UNIQUE",
+        "error_code": 1034,
+        "english_details": "serial number must be unique.",
+        "farsi_details": "شماره سریال باید عدد یکتا باشد."
+    },
+    "MODULE_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "MODULE_NOT_EXISTS",
+        "error_code": 1035,
+        "english_details": "module with these information does not exists.",
+        "farsi_details": "ماژول با اطلاعات وارد شده وجود ندارد."
+    },
+    "MODULE_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "MODULE_DELETED",
+        "error_code": 1036,
+        "english_details": "module  deleted successfully.",
+        "farsi_details": "ماژول با موفقیت حذف شد."
+    },
+    "module": {
+        "status": "failed",
+        "status_code": 409,
+        "summary": "MODULE_IS_NOT_FREE",
+        "error_code": 1034,
+        "english_details": "module is in use with another meter",
+        "farsi_details": "ماژول در حال استفاده با کنتور دیگری می باشد"
+    },
 }

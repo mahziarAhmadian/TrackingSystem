@@ -9,6 +9,7 @@ class Module(models.Model):
     serial_number = models.CharField(max_length=250, unique=True)
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return "{} - {} ".format(self.name, self.serial_number)

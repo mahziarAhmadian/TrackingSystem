@@ -20,4 +20,5 @@ from django.urls import path, include, re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('user.urls')),
+    path('api/tracking/', include('tracking_devices.urls')),
 ]

@@ -12,7 +12,19 @@ class Permission(models.Model):
 
 
 """
-    system permissions : 
-    AddType , EditType , DeleteType , EditUser , GetUserDetail , DeleteUser , AddProject, EditProject , DeleteProject,
-    GetProject,GetProjectDocuments,DeleteProjectDocument
+
+    system permissions {
+    
+    # TypePermissions : [AddType , EditType , DeleteType]
+    
+    # UserPermissions : [EditUser , GetUserDetail , DeleteUser]
+    
+    # ProjectPermissions :[AddProject, EditProject , DeleteProject,GetProject,GetProjectDocuments,DeleteProjectDocument]
+    
+    # ModulePermissions : [AddModule , EditModule, DeleteModule,GetModule]
+    
+    # MetePermissions : [AddMeter]
+    
+        }
+
 """
