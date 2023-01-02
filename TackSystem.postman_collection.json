@@ -62,7 +62,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"OwnerType\":\"Self\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"PhoneNumber\":\"09356165600\",\r\n    \"isStaff\":null,\r\n    \"isActive\":null,\r\n    \"isSuperuser\":null\r\n}",
+									"raw": "{\r\n    \"OwnerType\":\"Other\",\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"PhoneNumber\":null,\r\n    \"isStaff\":null,\r\n    \"isActive\":null,\r\n    \"isSuperuser\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1267,6 +1267,224 @@
 										"api",
 										"tracking",
 										"meter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"meterId\":\"d139bd68-362f-441f-a0d4-781fa278ef87\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meter",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meter"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Truck",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"\",\r\n    \"numberPlate\":\"1234\",\r\n    \"model\":1,\r\n    \"information\":{},\r\n    \"meterId\":\"7ba10828-eef6-4e35-8732-041ae3f62c31\",\r\n    \"ownerId\":\"ecd55993-4773-4c86-bd2a-c1be3de58292\",\r\n    \"driverId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truck",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truck"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_comment\": \"truckId is required when method set on 'One' if method ser on 'All' pagination & search field is required.\",\r\n    \"MethodType\":\"All\",\r\n    \"truckId\":\"0d3fe7d3-81b6-4337-b9d4-bb1207c18513\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"name\":null,\r\n    \"numberPlate\":null,\r\n    \"model\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truck",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truck"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PartialUpdate",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckId\":\"0d3fe7d3-81b6-4337-b9d4-bb1207c18513\",\r\n    \"name\":\"TruckOne\",\r\n    \"model\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truck",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truck"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckId\":\"0d3fe7d3-81b6-4337-b9d4-bb1207c18513\",\r\n    \"name\":\"TruckOne\",\r\n    \"model\":1,\r\n    \"information\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truck",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truck"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckId\":\"0d3fe7d3-81b6-4337-b9d4-bb1207c18513\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truck",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truck"
 									]
 								}
 							},

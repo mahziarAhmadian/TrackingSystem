@@ -7,4 +7,7 @@ urlpatterns = [
     path('module', views.ModuleView.as_view(), name='module'),
     # meter api
     path('meter', views.MeterView.as_view(), name='meter'),
+    # truck api
+    path('truck', views.TruckView.as_view(), name='truck'),
+
 ]

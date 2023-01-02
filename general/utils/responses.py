@@ -564,8 +564,56 @@ responses = {
         "status": "success",
         "status_code": 200,
         "summary": "METER_UPDATED",
-        "error_code": 0,
+        "error_code": 1037,
         "english_details": "meter information updated successfully.",
         "farsi_details": "اطلاعات کنتور با موفقیت به روزرسانی شد."
+    },
+    "NUMBER_PLATE_EXISTS": {
+        "status": "failed",
+        "status_code": 455,
+        "summary": "NUMBER_PLATE_EXISTS",
+        "error_code": 1038,
+        "english_details": "truck with this number plate already exists.",
+        "farsi_details": "کامیون با شماره پلاک وارد شده در حال حاضر وجود دارد."
+    },
+    "METER_EXISTS": {
+        "status": "failed",
+        "status_code": 455,
+        "summary": "METER_EXISTS",
+        "error_code": 1039,
+        "english_details": "truck with this meter already exists.",
+        "farsi_details": "کامیون با کنتور وارد شده در حال حاضر وجود دارد."
+    },
+    "DRIVER_EXISTS": {
+        "status": "failed",
+        "status_code": 455,
+        "summary": "DRIVER_EXISTS",
+        "error_code": 1040,
+        "english_details": "truck with this driver already exists.",
+        "farsi_details": "کامیون با راننده وارد شده در حال حاضر وجود دارد."
+    },
+    "TRUCK_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "TRUCK_NOT_EXISTS",
+        "error_code": 1040,
+        "english_details": "truck with these id does not exists.",
+        "farsi_details": "کامیونی با اطلاعات وارد شده وجود ندارد."
+    },
+    "TRUCK_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TRUCK_DELETED",
+        "error_code": 1041,
+        "english_details": "truck  deleted successfully.",
+        "farsi_details": "کامیون با موفقیت حذف شد."
+    },
+    "METER_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "METER_DELETED",
+        "error_code": 1042,
+        "english_details": "meter  deleted successfully.",
+        "farsi_details": "کنتور با موفقیت حذف شد."
     },
 }

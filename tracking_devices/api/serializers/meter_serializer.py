@@ -25,11 +25,6 @@ class MeterSerializer(serializers.ModelSerializer):
             return {"error": False, "value": module_obj}
         except:
             return {"error": True, "value": 'MODULE_NOT_EXISTS'}
-        # is_exist = Meter.objects.filter(module=module_id)
-        # if len(is_exist) == 0:
-        #     return {"error": False, "value": module_id}
-        # else:
-        #     return {"error": True, "value": 'SERIAL_NUMBER_IS_NOT_UNIQUE'}
 
     def _validate_serial_number(self, serial_number):
         # get request method
@@ -106,6 +101,6 @@ class MeterSerializer(serializers.ModelSerializer):
     # --------------------------------------function for get method-----------------------------------------------------
 
     def get_moduleInfo(self, meter):
-        module = Meter.objects.get(module=meter.module.id)
+        module = Module.objects.get(id=meter.module.id)
         result = ModuleSerializer(module).data
         return result

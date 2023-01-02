@@ -23,7 +23,9 @@ class Permission(models.Model):
     
     # ModulePermissions : [AddModule , EditModule, DeleteModule,GetModule]
     
-    # MetePermissions : [AddMeter,GetMeter,EditMeter]
+    # MetePermissions : [AddMeter,GetMeter,EditMeter,DeleteMeter]
+    
+    # TruckPermissions : [AddTruck,GetTruck,EditTruck,DeleteTruck]
     
         }
 
