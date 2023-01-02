@@ -1177,7 +1177,80 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"a3732175-3b7d-4d93-9c2d-3f1c0cb0725e\"\r\n}",
+									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"bed5379e-755a-4775-9baf-465c17ec3091\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meter",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_comment\": \"methodId is required when method set on 'One' if method ser on 'All' pagination & search field is required.\",\r\n    \"MethodType\":\"All\",\r\n    \"meterId\":\"7ba10828-eef6-4e35-8732-041ae3f62c31\", \r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"name\":null,\r\n    \"serialNumber\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meter",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PartialUpdate",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"meterId\":\"7ba10828-eef6-4e35-8732-041ae3f62c31\",\r\n    \"name\":\"MeterOne\",\r\n    \"information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
