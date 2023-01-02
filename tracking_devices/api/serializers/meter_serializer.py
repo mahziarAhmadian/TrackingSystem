@@ -6,15 +6,20 @@ from tracking_devices.api.serializers.module_serializer import ModuleSerializer
 class MeterSerializer(serializers.ModelSerializer):
     name = serializers.CharField(allow_blank=True, required=True)
     serialNumber = serializers.CharField(source='serial_number', required=True)
+    moduleId = serializers.CharField(write_only=True)
     information = serializers.JSONField()
-    # module = serializers.UUIDField(required=True)
-    moduleInfo = ModuleSerializer(read_only=True)
+    moduleInfo = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Meter
-        fields = ('id', 'name', 'serialNumber', 'information', 'create_time', 'moduleInfo', 'module')
+        fields = ('id', 'name', 'serialNumber', 'information', 'create_time', 'moduleId', 'moduleInfo')
 
     def _validate_module(self, module_id):
+        # get request method
+        request_method = self.context.get('request').method
+        allowed_method = ['PATCH']
+        if request_method in allowed_method:
+            return {"error": False, "value": module_id}
         try:
             module_obj = Module.objects.get(id=module_id)
             return {"error": False, "value": module_obj}
@@ -46,13 +51,13 @@ class MeterSerializer(serializers.ModelSerializer):
         # extract expected fields
         # name = attrs.get('name', None)
         serialNumber = attrs.get('serial_number', None)
-        module = attrs.get('module', None)
+        moduleId = attrs.get('moduleId', None)
         # information = attrs.get('information', None)
         # ---------------------------------------------------------------------------------
         # validate fields
         # name = name
         # information = information
-        module = self._validate_module(module_id=module)
+        module = self._validate_module(module_id=moduleId)
         serial_number = self._validate_serial_number(serial_number=serialNumber)
 
         # -----------------------------------------------------------------------------------
@@ -68,7 +73,39 @@ class MeterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(errors)
         # -----------------------------------------------------------------------------------
         # prepare validated data
-        # validated_data = {
-        # }
+        validated_data = {
+            # 'first_name': first_name.get('value'),
+            # 'last_name': last_name.get('value'),
+            'name': attrs.get('name'),
+            'serialNumber': serial_number.get('value'),
+            'information': attrs.get('information'),
+            'module': module.get('value'),
+        }
         # ---------------------------------------------------------------------------------
-        return attrs
+
+        return validated_data
+
+    def create(self, validated_data):
+        name = validated_data.pop('name')
+        serialNumber = validated_data.pop('serialNumber')
+        module = validated_data.pop('module')
+        information = validated_data.pop('information')
+        meter = Meter.objects.create(name=name, serial_number=serialNumber, module=module, information=information,
+                                     **validated_data)
+
+        return meter
+
+    def update(self, meter, **kwargs):
+        if 'information' in kwargs:
+            meter.information = kwargs.get('information')
+        if 'name' in kwargs:
+            meter.name = kwargs.get('name')
+        meter.save()
+        return meter
+
+    # --------------------------------------function for get method-----------------------------------------------------
+
+    def get_moduleInfo(self, meter):
+        module = Meter.objects.get(module=meter.module.id)
+        result = ModuleSerializer(module).data
+        return result

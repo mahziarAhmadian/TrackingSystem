@@ -552,12 +552,20 @@ responses = {
         "english_details": "module  deleted successfully.",
         "farsi_details": "ماژول با موفقیت حذف شد."
     },
-    "module": {
+    "METER_NOT_EXISTS": {
         "status": "failed",
-        "status_code": 409,
-        "summary": "MODULE_IS_NOT_FREE",
-        "error_code": 1034,
-        "english_details": "module is in use with another meter",
-        "farsi_details": "ماژول در حال استفاده با کنتور دیگری می باشد"
+        "status_code": 404,
+        "summary": "METER_NOT_EXISTS",
+        "error_code": 1036,
+        "english_details": "meter with these information does not exists.",
+        "farsi_details": "کنتور با اطلاعات وارد شده وجود ندارد."
+    },
+    "METER_UPDATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "METER_UPDATED",
+        "error_code": 0,
+        "english_details": "meter information updated successfully.",
+        "farsi_details": "اطلاعات کنتور با موفقیت به روزرسانی شد."
     },
 }
