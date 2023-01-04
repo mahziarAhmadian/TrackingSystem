@@ -4,4 +4,4 @@ from .truck import Truck
 from .module import Module
 from .meter_site import MeterSite
 from .truck_meter_site import TruckMeterSite
-from .trucking_records import TruckingRecords
+from .trucking_record import TruckingRecords

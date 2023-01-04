@@ -27,6 +27,8 @@ class Permission(models.Model):
     
     # TruckPermissions : [AddTruck,GetTruck,EditTruck,DeleteTruck]
     
+    # TruckRecordsPermissions : [AddTruckRecord]
+    
         }
 
 """

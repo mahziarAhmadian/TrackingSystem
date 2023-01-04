@@ -13,9 +13,10 @@ class TruckingRecords(models.Model):
     consumption = models.FloatField()
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
-    meter = models.ForeignKey(Meter, on_delete=models.CASCADE)
-    truck = models.ForeignKey(Truck, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.DO_NOTHING)
+    meter = models.ForeignKey(Meter, on_delete=models.DO_NOTHING)
+    truck = models.ForeignKey(Truck, on_delete=models.DO_NOTHING)
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return "{}".format(self.id)
