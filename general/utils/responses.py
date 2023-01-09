@@ -616,4 +616,28 @@ responses = {
         "english_details": "meter  deleted successfully.",
         "farsi_details": "کنتور با موفقیت حذف شد."
     },
+    "TRUCK_RECORD_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "TRUCK_RECORD_NOT_EXISTS",
+        "error_code": 1045,
+        "english_details": "truck record with these information does not exists.",
+        "farsi_details": "رکوردی با اطلاعات وارد شده وجود ندارد."
+    },
+    "TRUCK_RECORD_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "USER_DELETED",
+        "error_code": 1046,
+        "english_details": "truck record deleted successfully.",
+        "farsi_details": "رکورد با موفقیت حذف شد."
+    },
+    "TRUCK_RECORD_UPDATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TRUCK_RECORD_UPDATED",
+        "error_code": 0,
+        "english_details": "record  updated successfully.",
+        "farsi_details": "کورد با موفقیت به روزرسانی شد."
+    },
 }

@@ -1,9 +1,8 @@
 from rest_framework import serializers
-from tracking_devices.models import TruckingRecords, Module, Meter
+from tracking_devices.models import TruckingRecords, Module, Meter, Truck
 from .meter_serializer import MeterSerializer
-from user.api.serializers.user_serializer import UserSerializer
-from user.models import User
-
+from .module_serializer import ModuleSerializer
+from .truck_serializer import TruckSerializer
 
 class TruckRecordSerializer(serializers.ModelSerializer):
     lat = serializers.CharField(allow_blank=True)
@@ -13,13 +12,15 @@ class TruckRecordSerializer(serializers.ModelSerializer):
     moduleId = serializers.CharField(write_only=True)
     meterId = serializers.CharField(write_only=True)
     truckId = serializers.CharField(write_only=True)
+    moduleInfo = serializers.SerializerMethodField(read_only=True)
+    meterInfo = serializers.SerializerMethodField(read_only=True)
+    truckInfo = serializers.SerializerMethodField(read_only=True)
 
-    # moduleInfo
-    # meterInfo
-    # truckInfo
     class Meta:
         model = TruckingRecords
-        fields = ('id', 'lat', 'long', 'consumption', 'information', 'create_time', 'moduleId', 'meterId', 'truckId')
+        fields = (
+            'id', 'lat', 'long', 'consumption', 'information', 'create_time', 'moduleId', 'meterId', 'truckId',
+            'meterInfo', 'moduleInfo', 'truckInfo')
 
     def _validate_meter(self, meter_id):
         # get request method
@@ -57,7 +58,7 @@ class TruckRecordSerializer(serializers.ModelSerializer):
             return {"error": False, "value": None}
 
         try:
-            truck_obj = User.objects.get(id=truck_id)
+            truck_obj = Truck.objects.get(id=truck_id)
             return {"error": False, "value": truck_obj}
         except:
             return {"error": True, "value": 'TRUCK_NOT_EXISTS'}
@@ -77,7 +78,7 @@ class TruckRecordSerializer(serializers.ModelSerializer):
         meter_obj = self._validate_meter(meter_id=meterId)
         module_obj = self._validate_module(module_id=moduleId)
         truck_obj = self._validate_truck(truck_id=truckId)
-
+        print(f"this is truck obj {truck_obj}")
         # -----------------------------------------------------------------------------------
         # check error exist or not
         errors = list()
@@ -117,3 +118,32 @@ class TruckRecordSerializer(serializers.ModelSerializer):
         truck_records = TruckingRecords.objects.create(lat=lat, long=long, consumption=consumption,
                                                        information=information, meter=meter, module=module, truck=truck)
         return truck_records
+
+    # --------------------------------------------- for get method------------------------------------------------------
+    def get_meterInfo(self, truck_record):
+        meter = Meter.objects.get(id=truck_record.meter.id)
+        result = MeterSerializer(meter).data
+        result.pop('moduleInfo')
+        return result
+
+    def get_moduleInfo(self, truck_record):
+        module = Module.objects.get(id=truck_record.module.id)
+        result = ModuleSerializer(module).data
+        return result
+
+    def get_truckInfo(self, truck_record):
+        truck = Truck.objects.get(id=truck_record.truck.id)
+        result = TruckSerializer(truck).data
+        result.pop('meterInfo')
+        result['driverInfo'] = {
+            'Id': result['driverInfo']['Id'],
+            'PhoneNumber': result['driverInfo']['PhoneNumber'],
+            'userType': result['driverInfo']['userType'],
+
+        }
+        result['ownerInfo'] = {
+            'Id': result['ownerInfo']['Id'],
+            'PhoneNumber': result['ownerInfo']['PhoneNumber'],
+            'userType': result['ownerInfo']['userType'],
+        }
+        return result

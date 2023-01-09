@@ -9,5 +9,7 @@ urlpatterns = [
     path('meter', views.MeterView.as_view(), name='meter'),
     # truck api
     path('truck', views.TruckView.as_view(), name='truck'),
+    # truck_record api
+    path('truckRecord', views.TruckRecordView.as_view(), name='truck_record'),
 
 ]

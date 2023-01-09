@@ -11,3 +11,13 @@ class ModuleAdmin(admin.ModelAdmin):
 @admin.register(models.Meter)
 class MeterAdmin(admin.ModelAdmin):
     fields = ('name', 'serial_number', 'information', 'module',)
+
+
+@admin.register(models.Truck)
+class TruckAdmin(admin.ModelAdmin):
+    fields = ('name', 'number_plate', 'model', 'information', 'meter', 'driver', 'owner',)
+
+
+@admin.register(models.TruckingRecords)
+class TruckRecordAdmin(admin.ModelAdmin):
+    fields = ('lat', 'long', 'consumption', 'information', 'module', 'meter', 'truck',)
