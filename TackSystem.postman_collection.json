@@ -1029,7 +1029,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"moduleId\":\"3ddf170c-6e98-4ea1-b72b-f2bb3d771b71\",\r\n   \"name\":\"moduleTwo\"\r\n}",
+									"raw": "{\r\n   \"moduleId\":\"bbf513c8-0a9e-4a8c-a728-ce93733037aa\",\r\n   \"name\":\"moduleOneEdited\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1099,7 +1099,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"moduleId\":\"3ddf170c-6e98-4ea1-b72b-f2bb3d771b71\"\r\n}",
+									"raw": "{\r\n   \"moduleId\":\"bbf513c8-0a9e-4a8c-a728-ce93733037aa\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1177,7 +1177,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"bed5379e-755a-4775-9baf-465c17ec3091\"\r\n}",
+									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"083a4362-503b-4585-bdc4-c7df3bb7d63d\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1250,7 +1250,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"meterId\":\"7ba10828-eef6-4e35-8732-041ae3f62c31\",\r\n    \"name\":\"MeterOne\",\r\n    \"information\":{}\r\n}",
+									"raw": "{\r\n    \"meterId\":\"928df50c-8f6c-4586-8612-bf8f8837dee4\",\r\n    \"name\":\"MeterOne\",\r\n    \"information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1285,7 +1285,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"meterId\":\"d139bd68-362f-441f-a0d4-781fa278ef87\"\r\n}",
+									"raw": "{\r\n    \"meterId\":\"928df50c-8f6c-4586-8612-bf8f8837dee4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1485,6 +1485,302 @@
 										"api",
 										"tracking",
 										"truck"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TruckRecord",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lat\":14.164516546,\r\n    \"long\":12.694659866,\r\n    \"consumption\":14.8,\r\n    \"information\":{},\r\n    \"moduleId\":\"bed5379e-755a-4775-9baf-465c17ec3091\",\r\n    \"meterId\":\"326e5451-1f0a-4390-95a3-1775c769ba36\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckRecord",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckRecord"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"MethodType\":\"All\",\r\n    \"truckRecordId\":\"\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"lat\":null,\r\n    \"long\":null,\r\n    \"consumption\":null,\r\n    \"module\":null,\r\n    \"meter\":null,\r\n    \"truck\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckRecord",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckRecord"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckRecordId\":\"18a5ba2b-e0c6-4522-9262-3e965327f4b1\",\r\n    \"lat\":12.45646,\r\n    \"long\":16.9645616,\r\n    \"consumption\":10.44\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckRecord",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckRecord"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckRecordId\":\"18a5ba2b-e0c6-4522-9262-3e965327f4b1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckRecord",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckRecord"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MeterSite",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Tehran\",\r\n    \"lat\":14.1645156,\r\n    \"long\":18.654948,\r\n    \"information\":{},\r\n    \"ownerId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"MethodType\":\"All\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"name\":null,\r\n    \"lat\":null,\r\n    \"long\":null,\r\n    \"ownerId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"meterSiteId\":\"9a718b67-5c3b-435c-850d-9067bceff593\",\r\n    \"name\":\"Shiraz\",\r\n    \"lat\":14.1665,\r\n    \"long\":10.189419,\r\n    \"information\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"meterSiteId\":\"eb0d8cc7-fe76-4f64-8f1f-c38967b5f93b\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterSite"
 									]
 								}
 							},
