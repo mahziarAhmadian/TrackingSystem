@@ -1,2 +1,3 @@
 from .module_serializer import ModuleSerializer
 from .meter_site_serializer import MeterSiteSerializer
+from .truck_meter_site_serializer import TruckMeterSiteSerializer

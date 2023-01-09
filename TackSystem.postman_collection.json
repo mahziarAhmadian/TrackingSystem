@@ -1787,6 +1787,119 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "TruckMeterSite",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"meterSiteId\":\"9a718b67-5c3b-435c-850d-9067bceff593\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\",\r\n    \"information\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckMeterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckMeterSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"MethodType\":\"All\",\r\n    \"truckMeterSiteId\":\"\",\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"meterSiteId\":null,\r\n    \"truckId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckMeterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckMeterSite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"truckMeterSiteId\":\"65c2c287-5faf-4290-b373-1618d153fe14\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/truckMeterSite",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"truckMeterSite"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

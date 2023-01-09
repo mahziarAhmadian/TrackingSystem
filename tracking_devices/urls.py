@@ -13,5 +13,7 @@ urlpatterns = [
     path('truckRecord', views.TruckRecordView.as_view(), name='truck_record'),
     # meter_site api
     path('meterSite', views.MeterSiteView.as_view(), name='meter_site'),
+    # truck_meter_site api
+    path('truckMeterSite', views.TruckMeterSiteView.as_view(), name='meter_site'),
 
 ]

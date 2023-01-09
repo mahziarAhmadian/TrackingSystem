@@ -31,6 +31,7 @@ class Permission(models.Model):
     
     # MeterSitePermissions : [AddMeterSite,GetMeterSite,DeleteMeterSite,EditMeterSite] 
     
+    # TruckMeterSite : [AddTruckMeterSite,GetTruckMeterSite,DeleteTruckMeterSite] 
         }
 
 """

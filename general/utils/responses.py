@@ -664,4 +664,28 @@ responses = {
         "english_details": "meter site information updated successfully.",
         "farsi_details": "اطلاعات محل کنتور با موفقیت به روزرسانی شد."
     },
+    "TRUCK_METER_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "TRUCK_METER_NOT_EXISTS",
+        "error_code": 1049,
+        "english_details": "truck_meter_site with these id does not exists.",
+        "farsi_details": "هیچ محلی برای کامیون با اطلاعات وارد شده وجود ندارد."
+    },
+    "TRUCK_METER_SITE_CREATED": {
+        "status": "success",
+        "status_code": 201,
+        "summary": "TRUCK_METER_SITE_CREATED",
+        "error_code": 1050,
+        "english_details": "truck_meter_site created successfully",
+        "farsi_details": "محل ابگیری کامیون با موفقیت ثبت شد."
+    },
+    "TRUCK_METER_SITE_DELETED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "TRUCK_METER_SITE_DELETED",
+        "error_code": 1051,
+        "english_details": "truck_meter_site  deleted successfully.",
+        "farsi_details": "محل ابگیری کامیون  با موفقیت حذف شد."
+    },
 }
