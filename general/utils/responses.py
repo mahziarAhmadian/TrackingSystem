@@ -640,4 +640,28 @@ responses = {
         "english_details": "record  updated successfully.",
         "farsi_details": "کورد با موفقیت به روزرسانی شد."
     },
+    "METER_SITE_NOT_EXISTS": {
+        "status": "failed",
+        "status_code": 404,
+        "summary": "METER_SITE_NOT_EXISTS",
+        "error_code": 1047,
+        "english_details": "meter site with these information does not exists.",
+        "farsi_details": "محل کنتوری با اطلاعات وارد شده وجود ندارد."
+    },
+    "METER_SITE_CREATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "METER_SITE_CREATED",
+        "error_code": 1047,
+        "english_details": "meter site created successfully.",
+        "farsi_details": "محل کنتور با موفقیت اضافه شد . "
+    },
+    "METER_SITE_UPDATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "METER_SITE_UPDATED",
+        "error_code": 1048,
+        "english_details": "meter site information updated successfully.",
+        "farsi_details": "اطلاعات محل کنتور با موفقیت به روزرسانی شد."
+    },
 }

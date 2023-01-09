@@ -11,7 +11,8 @@ class MeterSite(models.Model):
     long = models.FloatField()
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return "{}".format(self.id)

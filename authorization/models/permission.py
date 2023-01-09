@@ -29,6 +29,8 @@ class Permission(models.Model):
     
     # TruckRecordsPermissions : [AddTruckRecord,GetTruckRecord,DeleteTruckRecord,EditTruckRecord]
     
+    # MeterSitePermissions : [AddMeterSite,GetMeterSite,DeleteMeterSite,EditMeterSite] 
+    
         }
 
 """
