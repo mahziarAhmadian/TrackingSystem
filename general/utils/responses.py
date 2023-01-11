@@ -688,4 +688,12 @@ responses = {
         "english_details": "truck_meter_site  deleted successfully.",
         "farsi_details": "محل ابگیری کامیون  با موفقیت حذف شد."
     },
+    "PERMISSIONS_CREATED": {
+        "status": "success",
+        "status_code": 200,
+        "summary": "PERMISSIONS_CREATED",
+        "error_code": 1047,
+        "english_details": "permission created successfully.",
+        "farsi_details": "دسترسی با موفقیت اضافه شد . "
+    },
 }

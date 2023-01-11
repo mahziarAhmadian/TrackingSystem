@@ -7,6 +7,8 @@ class Permission(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 
+    objects = models.Manager()
+
     def __str__(self) -> str:
         return self.title
 
