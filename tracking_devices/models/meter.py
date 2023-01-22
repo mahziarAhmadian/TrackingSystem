@@ -12,7 +12,7 @@ class Meter(models.Model):
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
     module = models.OneToOneField(Module, on_delete=models.CASCADE)
-    meter_type = models.OneToOneField(MeterType, on_delete=models.CASCADE)
+    meter_type = models.ForeignKey(MeterType, on_delete=models.CASCADE)
     objects = models.Manager()
 
     def __str__(self) -> str:
