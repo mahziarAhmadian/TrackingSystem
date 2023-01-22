@@ -48,7 +48,8 @@ class MeterView(APIView):
         return Response(data=data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        input_data = request.data
+        #input_data = request.data
+        input_data = request.GET
         user = request.user
         data = generate_response(keyword='OPERATION_DONE')
         # check user type for create new module .
@@ -67,8 +68,8 @@ class MeterView(APIView):
                 'name__icontains': input_data.get('name'),
                 'serial_number': input_data.get('serialNumber'),
             }
-            meter_obj = self.get_object(meter_id=None, filters=filters)
-            pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+            meter_obj = self.get_object(meter_id=None, filters={})
+            pagination = self.pagination_class(page=int(input_data.get('page')), count=int(input_data.get('count')))
             module_pagination = pagination.pagination_query(query_object=meter_obj, order_by_object='create_time')
             meter_info = self.serializer_class(module_pagination, many=True).data
             data['allMeterCount'] = meter_obj.count()

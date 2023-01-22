@@ -18,11 +18,13 @@ class UserSerializer(serializers.ModelSerializer):
     userType = serializers.SerializerMethodField()
     profile = UserProfileSerializer(read_only=True)
     Images = serializers.SerializerMethodField()
+    firstName = serializers.CharField(source='first_name', read_only=True)
+    lastName = serializers.CharField(source='last_name', read_only=True)
 
     class Meta:
         model = User
         fields = ('Id', 'PhoneNumber', 'PhoneNumberIsValid', 'Blocked', 'isStaff', 'isActive', 'isSuperuser',
-                  'Notes', 'permissions', 'userType', 'profile', 'Images')
+                  'Notes', 'permissions', 'userType', 'profile', 'Images', 'firstName', 'lastName')
 
     def get_Images(self, user):
         images = UserImage.objects.filter(user=user.id)

@@ -96,7 +96,8 @@ class UserAPI(APIView):
         return Response(data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        input_data = request.data
+        #input_data = request.data
+        input_data = request.GET
         user = request.user
         data = generate_response(keyword='OPERATION_DONE')
         owner_type = self.check_field.check_owner_type(input_data=input_data)
@@ -116,8 +117,8 @@ class UserAPI(APIView):
                     'is_active': input_data.get('isActive'),
                     'is_superuser': input_data.get('isSuperuser'),
                 }
-                users = self.get_object(user_id=None, filters=filters)
-                pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+                users = self.get_object(user_id=None, filters={})
+                pagination = self.pagination_class(page=int(input_data.get('page')), count=int(input_data.get('count')))
                 users_pagination = pagination.pagination_query(query_object=users, order_by_object='create_time')
                 user_info = self.serializer_class(users_pagination, many=True).data
                 data['allUserCount'] = users.count()

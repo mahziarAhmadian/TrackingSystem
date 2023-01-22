@@ -45,15 +45,16 @@ class UserTypeView(APIView):
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
 
     def get(self, request, *args, **kwargs):
-        input_data = request.data
+        #input_data = request.data
+        input_data = request.GET
         required_fields = ['page', 'count', 'EnglishName', 'PersianName']
         self.check_field.check_field(required_fields=required_fields, input_data=input_data)
-        paginator = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+        paginator = self.pagination_class(page=int(input_data.get('page')), count=int(input_data.get('count')))
         filters = {
             'english_name__icontains': input_data.get('EnglishName'),
             'persian_name__icontains': input_data.get('PersianName')
         }
-        types = self.get_object(filters=filters)
+        types = self.get_object(filters={})
         all_types_count = types.count()
         paginated_data = paginator.pagination_query(query_object=types, order_by_object='create_time')
         serializer = self.serializer_class(paginated_data, many=True)

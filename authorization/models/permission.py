@@ -7,8 +7,6 @@ class Permission(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 
-    objects = models.Manager()
-
     def __str__(self) -> str:
         return self.title
 
@@ -29,11 +27,6 @@ class Permission(models.Model):
     
     # TruckPermissions : [AddTruck,GetTruck,EditTruck,DeleteTruck]
     
-    # TruckRecordsPermissions : [AddTruckRecord,GetTruckRecord,DeleteTruckRecord,EditTruckRecord]
-    
-    # MeterSitePermissions : [AddMeterSite,GetMeterSite,DeleteMeterSite,EditMeterSite] 
-    
-    # TruckMeterSite : [AddTruckMeterSite,GetTruckMeterSite,DeleteTruckMeterSite] 
         }
 
 """

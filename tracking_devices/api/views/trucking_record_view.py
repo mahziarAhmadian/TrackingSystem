@@ -48,7 +48,8 @@ class TruckRecordView(APIView):
         return Response(data=data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        input_data = request.data
+        #input_data = request.data
+        input_data = request.GET
         user = request.user
         data = generate_response(keyword='OPERATION_DONE')
         # check user type for create new module .
@@ -64,15 +65,15 @@ class TruckRecordView(APIView):
             self.check_field.check_field(input_data, required_fields=required_fields)
             # filters for get_all
             filters = {
-                'lat__icontains': input_data.get('lat'),
-                'long__icontains': input_data.get('long'),
-                'consumption': input_data.get('consumption'),
-                'module': input_data.get('module'),
-                'meter': input_data.get('meter'),
+                #'lat__icontains': input_data.get('lat'),
+                #'long__icontains': input_data.get('long'),
+                #'consumption': input_data.get('consumption'),
+                #'module': input_data.get('module'),
+                #'meter': input_data.get('meter'),
                 'truck': input_data.get('truck'),
             }
             truck_record_objects = self.get_object(filters=filters)
-            pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
+            pagination = self.pagination_class(page=int(input_data.get('page')), count=int(input_data.get('count')))
             truck_record_pagination = pagination.pagination_query(query_object=truck_record_objects,
                                                                   order_by_object='create_time')
             truck_record_info = self.serializer_class(truck_record_pagination, many=True).data
