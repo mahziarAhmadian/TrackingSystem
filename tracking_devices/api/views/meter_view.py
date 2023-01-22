@@ -48,8 +48,8 @@ class MeterView(APIView):
         return Response(data=data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        input_data = request.data
-        # input_data = request.GET
+        # input_data = request.data
+        input_data = request.GET
         user = request.user
         data = generate_response(keyword='OPERATION_DONE')
         # check user type for create new module .
