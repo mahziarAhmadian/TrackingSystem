@@ -108,7 +108,7 @@ class ModuleView(APIView):
         return Response(data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        #input_data = request.data
+        # input_data = request.data
         input_data = request.GET
         #return Response(input_data, status=200)
         user = request.user

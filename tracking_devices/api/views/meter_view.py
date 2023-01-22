@@ -38,7 +38,7 @@ class MeterView(APIView):
         # check user permission for add new module to system .
         self.check_field.check_user_permission(user=user, user_permission_name='AddMeter')
         # check for required field should be in input data .
-        required_fields = ['name', 'serialNumber', 'information', 'moduleId']
+        required_fields = ['name', 'serialNumber', 'information', 'moduleId', 'typeId']
         self.check_field.check_field(input_data=input_data, required_fields=required_fields)
         serializer = self.serializer_class(data=input_data, context={'request': request})
         if not serializer.is_valid():
@@ -48,8 +48,8 @@ class MeterView(APIView):
         return Response(data=data, status=data.get('statusCode'))
 
     def get(self, request, *args, **kwargs):
-        #input_data = request.data
-        input_data = request.GET
+        input_data = request.data
+        # input_data = request.GET
         user = request.user
         data = generate_response(keyword='OPERATION_DONE')
         # check user type for create new module .

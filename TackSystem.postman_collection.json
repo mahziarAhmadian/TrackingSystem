@@ -259,7 +259,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":\"Dr\",\r\n    \"PersianName\":null\r\n}",
+									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":null,\r\n    \"PersianName\":null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -994,7 +994,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"moduleOne\",\r\n    \"serialNumber\":\"1234\",\r\n    \"information\":{}\r\n}",
+									"raw": "{\r\n    \"name\":\"moduleTwo\",\r\n    \"serialNumber\":\"1234700\",\r\n    \"information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1177,7 +1177,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"\",\r\n    \"serialNumber\":\"12345\",\r\n    \"information\":{},\r\n    \"moduleId\":\"083a4362-503b-4585-bdc4-c7df3bb7d63d\"\r\n}",
+									"raw": "{\r\n    \"name\":\"MeterSiteConter\",\r\n    \"serialNumber\":\"12345789\",\r\n    \"information\":{},\r\n    \"moduleId\":\"5862ad55-b77f-4e7c-bd84-ea3ab787c44a\",\r\n    \"typeId\":\"0664fc6d-195a-4d5d-bb8e-47f48b40d7f1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1325,7 +1325,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"\",\r\n    \"numberPlate\":\"1234\",\r\n    \"model\":1,\r\n    \"information\":{},\r\n    \"meterId\":\"7ba10828-eef6-4e35-8732-041ae3f62c31\",\r\n    \"ownerId\":\"ecd55993-4773-4c86-bd2a-c1be3de58292\",\r\n    \"driverId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
+									"raw": "{\r\n    \"name\":\"TestTruck\",\r\n    \"numberPlate\":\"987987\",\r\n    \"model\":7,\r\n    \"information\":{},\r\n    \"meterId\":\"074b6205-265d-4ad3-a7a4-c51bf290da1f\",\r\n    \"ownerId\":\"ecd55993-4773-4c86-bd2a-c1be3de58292\",\r\n    \"driverId\":\"837caa92-bfde-46e7-9965-45eb36a18c86\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1789,6 +1789,72 @@
 					]
 				},
 				{
+					"name": "MeterType",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"englishName\":\"MeterSite\",\r\n    \"persianName\":\"محل آبگیری\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterType",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterType"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterType",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"meterType"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "TruckMeterSite",
 					"item": [
 						{
@@ -1894,6 +1960,82 @@
 										"api",
 										"tracking",
 										"truckMeterSite"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Counter",
+					"item": [
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/countAllData",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"countAllData"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "authorization",
+			"item": [
+				{
+					"name": "Permissions",
+					"item": [
+						{
+							"name": "Creat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"AutoAddPermissions\":true,\r\n    \"AutoAddForUser\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/permissions/add",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"permissions",
+										"add"
 									]
 								}
 							},

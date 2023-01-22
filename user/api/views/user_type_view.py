@@ -45,7 +45,7 @@ class UserTypeView(APIView):
             self.invalid_error.invalid_serializer(serializer_error=serializer.errors)
 
     def get(self, request, *args, **kwargs):
-        #input_data = request.data
+        # input_data = request.data
         input_data = request.GET
         required_fields = ['page', 'count', 'EnglishName', 'PersianName']
         self.check_field.check_field(required_fields=required_fields, input_data=input_data)

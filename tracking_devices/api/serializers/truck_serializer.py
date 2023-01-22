@@ -48,8 +48,11 @@ class TruckSerializer(serializers.ModelSerializer):
         except:
             pass
         try:
-            module_obj = Meter.objects.get(id=meter_id)
-            return {"error": False, "value": module_obj}
+            meter_obj = Meter.objects.get(id=meter_id)
+            print(f"this is meter_obj : {meter_obj}")
+            if meter_obj.meter_type.english_name != 'Truck':
+                return {"error": True, "value": 'METER_TYPE_NOT_VALID'}
+            return {"error": False, "value": meter_obj}
         except:
             return {"error": True, "value": 'METER_NOT_EXISTS'}
 

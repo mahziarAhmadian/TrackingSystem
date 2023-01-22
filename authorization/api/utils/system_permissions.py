@@ -22,5 +22,9 @@ class SystemPermissions:
 
             'TruckMeterSite': ['AddTruckMeterSite', 'GetTruckMeterSite', 'DeleteTruckMeterSite'],
 
+            'Counter': ['CountAllData'],
+
+            'MeterTypePermissions': ['AddMeterType', 'GetMeterType'],
+
         }
         return system_permissions

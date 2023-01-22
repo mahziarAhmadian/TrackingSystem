@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from .module import Module
+from .meter_type import MeterType
+
 
 class Meter(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -10,6 +12,7 @@ class Meter(models.Model):
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
     module = models.OneToOneField(Module, on_delete=models.CASCADE)
+    meter_type = models.OneToOneField(MeterType, on_delete=models.CASCADE)
     objects = models.Manager()
 
     def __str__(self) -> str:

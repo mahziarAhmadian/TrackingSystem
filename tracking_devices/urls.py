@@ -15,5 +15,8 @@ urlpatterns = [
     path('meterSite', views.MeterSiteView.as_view(), name='meter_site'),
     # truck_meter_site api
     path('truckMeterSite', views.TruckMeterSiteView.as_view(), name='meter_site'),
-
+    # count_all_data
+    path('countAllData', views.CounterView.as_view(), name='meter_site'),
+    # meter_type
+    path('meterType', views.MeterTypeView.as_view(), name='meter_site'),
 ]

@@ -21,3 +21,8 @@ class TruckAdmin(admin.ModelAdmin):
 @admin.register(models.TruckingRecords)
 class TruckRecordAdmin(admin.ModelAdmin):
     fields = ('lat', 'long', 'consumption', 'information', 'module', 'meter', 'truck',)
+
+
+@admin.register(models.MeterType)
+class MeterTypeAdmin(admin.ModelAdmin):
+    fields = ('english_name', 'persian_name')

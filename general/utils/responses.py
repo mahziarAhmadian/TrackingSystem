@@ -616,4 +616,12 @@ responses = {
         "english_details": "meter  deleted successfully.",
         "farsi_details": "کنتور با موفقیت حذف شد."
     },
+    "METER_TYPE_NOT_VALID": {
+        "status": "failed",
+        "status_code": 444,
+        "summary": "METER_TYPE_NOT_VALID",
+        "error_code": 1043,
+        "english_details": "The  type of meter you selected is not allowed",
+        "farsi_details": "تایپ کنتوری که انتخاب کردید مجاز نیست",
+    },
 }
