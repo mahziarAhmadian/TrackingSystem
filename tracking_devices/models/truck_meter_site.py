@@ -9,6 +9,7 @@ class TruckMeterSite(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     information = models.JSONField()
     create_time = models.DateTimeField(default=timezone.now)
+    consumption = models.FloatField(null=True)
     meter_site = models.ForeignKey(MeterSite, on_delete=models.CASCADE)
     truck = models.ForeignKey(Truck, on_delete=models.CASCADE)
 

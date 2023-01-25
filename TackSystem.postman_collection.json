@@ -221,7 +221,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"EnglishName\":\"Driver\",\r\n    \"PersianName\":\"راننده\",\r\n    \"Information\":{}\r\n}",
+									"raw": "{\r\n    \"EnglishName\":\"employer\",\r\n    \"PersianName\":\"کارفرما\",\r\n    \"Information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -245,9 +245,6 @@
 						},
 						{
 							"name": "Get",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -257,17 +254,8 @@
 										"type": "default"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"page\":1,\r\n    \"count\":10,\r\n    \"EnglishName\":null,\r\n    \"PersianName\":null\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{Track_server}}:{{Track_port}}/api/user/type",
+									"raw": "{{Track_server}}:{{Track_port}}/api/user/type?page=1&count=10&EnglishName=null&PersianName=null",
 									"host": [
 										"{{Track_server}}"
 									],
@@ -276,6 +264,24 @@
 										"api",
 										"user",
 										"type"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "count",
+											"value": "10"
+										},
+										{
+											"key": "EnglishName",
+											"value": "null"
+										},
+										{
+											"key": "PersianName",
+											"value": "null"
+										}
 									]
 								}
 							},
@@ -1508,7 +1514,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"lat\":14.164516546,\r\n    \"long\":12.694659866,\r\n    \"consumption\":14.8,\r\n    \"information\":{},\r\n    \"moduleId\":\"bed5379e-755a-4775-9baf-465c17ec3091\",\r\n    \"meterId\":\"326e5451-1f0a-4390-95a3-1775c769ba36\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\"\r\n}",
+									"raw": "{\r\n    \"lat\":14.164516546,\r\n    \"long\":12.694659866,\r\n    \"consumption\":18.78,\r\n    \"information\":{},\r\n    \"moduleId\":\"bed5379e-755a-4775-9baf-465c17ec3091\",\r\n    \"meterId\":\"326e5451-1f0a-4390-95a3-1775c769ba36\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1804,7 +1810,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"englishName\":\"MeterSite\",\r\n    \"persianName\":\"محل آبگیری\"\r\n}",
+									"raw": "{\r\n    \"englishName\":\"Truck\",\r\n    \"persianName\":\"کامیون\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1828,6 +1834,9 @@
 						},
 						{
 							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -1837,6 +1846,15 @@
 										"type": "default"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/meterType",
 									"host": [
@@ -1870,7 +1888,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"meterSiteId\":\"9a718b67-5c3b-435c-850d-9067bceff593\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\",\r\n    \"information\":{}\r\n}",
+									"raw": "{\r\n    \"meterSiteId\":\"9a718b67-5c3b-435c-850d-9067bceff593\",\r\n    \"truckId\":\"b6c33198-8f95-4893-982d-6c5a5bc264f4\",\r\n    \"consumption\":100.87,\r\n    \"information\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1991,6 +2009,49 @@
 										"api",
 										"tracking",
 										"countAllData"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Report",
+					"item": [
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Track_admin}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Track_server}}:{{Track_port}}/api/tracking/consumptionReport",
+									"host": [
+										"{{Track_server}}"
+									],
+									"port": "{{Track_port}}",
+									"path": [
+										"api",
+										"tracking",
+										"consumptionReport"
 									]
 								}
 							},

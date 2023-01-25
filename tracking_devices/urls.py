@@ -19,4 +19,6 @@ urlpatterns = [
     path('countAllData', views.CounterView.as_view(), name='meter_site'),
     # meter_type
     path('meterType', views.MeterTypeView.as_view(), name='meter_site'),
+    # report api
+    path('consumptionReport', views.ConsumptionReportView.as_view(), name='consumption_report'),
 ]

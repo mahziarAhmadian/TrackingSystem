@@ -2,15 +2,17 @@ from rest_framework import serializers
 from tracking_devices.models import TruckMeterSite, MeterSite, Truck
 from .truck_serializer import TruckSerializer
 
+
 class TruckMeterSiteSerializer(serializers.ModelSerializer):
     information = serializers.JSONField()
     meterSiteId = serializers.CharField(write_only=True)
     truckId = serializers.CharField(write_only=True)
     truckInfo = serializers.SerializerMethodField(read_only=True)
+    consumption = serializers.FloatField()
 
     class Meta:
         model = TruckMeterSite
-        fields = ('id', 'information', 'create_time', 'meterSiteId', 'truckId', 'truckInfo')
+        fields = ('id', 'information', 'create_time', 'meterSiteId', 'truckId', 'truckInfo', 'consumption')
 
     def _validate_meter_site(self, meter_site_id):
         # get request method
@@ -68,6 +70,7 @@ class TruckMeterSiteSerializer(serializers.ModelSerializer):
             'information': attrs.get('information', None),
             'meter_site': meter_site_obj.get('value'),
             'truck': truck_obj.get('value'),
+            'consumption': attrs.get('consumption', None),
         }
         # ---------------------------------------------------------------------------------
 
@@ -76,10 +79,11 @@ class TruckMeterSiteSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         information = validated_data.pop('information')
+        consumption = validated_data.pop('consumption')
         meter_site = validated_data.pop('meter_site')
         truck = validated_data.pop('truck')
         truck_meter_site = TruckMeterSite.objects.create(information=information, meter_site=meter_site, truck=truck,
-                                                         **validated_data)
+                                                         consumption=consumption, **validated_data)
 
         return truck_meter_site
 

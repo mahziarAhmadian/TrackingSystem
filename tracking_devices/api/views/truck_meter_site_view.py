@@ -38,7 +38,7 @@ class TruckMeterSiteView(APIView):
         # check user permission for add new module to system .
         self.check_field.check_user_permission(user=user, user_permission_name='AddTruckMeterSite')
         # check for required field should be in input data .
-        required_fields = ['information', 'meterSiteId', 'truckId']
+        required_fields = ['information', 'meterSiteId', 'truckId', 'consumption']
         self.check_field.check_field(input_data=input_data, required_fields=required_fields)
         serializer = self.serializer_class(data=input_data, context={'request': request})
         if not serializer.is_valid():
@@ -70,7 +70,7 @@ class TruckMeterSiteView(APIView):
             truck_meter_site_obj = self.get_object(filters=filters)
             pagination = self.pagination_class(page=input_data.get('page'), count=input_data.get('count'))
             truck_meter_site_pagination = pagination.pagination_query(query_object=truck_meter_site_obj,
-                                                                      order_by_object='create_time')
+                                                                      order_by_object='-create_time')
             truck_meter_site_info = self.serializer_class(truck_meter_site_pagination, many=True).data
             data['allTruckMeterSiteCount'] = truck_meter_site_obj.count()
         else:
